@@ -4,9 +4,13 @@ import { UserComponent } from './components/user/user.component';
 import { HomeComponent } from './components/home/home.component';
 import { ViewUserComponent } from './components/view-user/view-user.component';
 import { UpdateUserComponent } from './components/update-user/update-user.component';
+import { LoginComponent } from './components/login/login.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' }, // home
+  { path: 'login', component: LoginComponent }, // Login Page
+  { path: 'admin', component: AdminComponent }, // Admin Page
   { path: 'home', component: HomeComponent }, // Home Page
   { path: 'users', component: UserComponent }, // User list page
   { path: 'create-user', component: CreateUserComponent }, // Create user form
