@@ -1,1 +1,54 @@
-<p>admin works!</p>
+<div class="dashboard-container">
+    <div class="sidebar">
+        <h2>Admin Panel</h2>
+        <ul>
+            <li>
+                <div (click)="toggleDashboardContent()">Dashboard</div>
+            </li>
+            <li>
+                <div (click)="toggleUserContent()">Users</div>
+            </li>
+            <li><a href="#">Settings</a></li>
+            <li><a href="#">Reports</a></li>
+            <li><a href="#">Logout</a></li>
+        </ul>
+    </div>
+    <div class="content">
+        <div *ngIf="isDashboardContentVisible" class="dashboard-content">
+            <h1>Dashboard</h1>
+            <div class="stats">
+                <div class="stat-card">
+                    <h3>Users</h3>
+                    <p>123</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Sales</h3>
+                    <p>$4567</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Reports</h3>
+                    <p>12</p>
+                </div>
+            </div>
+            <div class="chart-section">
+                <h2>Analytics</h2>
+                <div class="chart-placeholder">[Chart Placeholder]</div>
+            </div>
+        </div>
+        <div *ngIf="isUserContentVisible" class="user-content">
+            <h2>Users</h2>
+            <div class="user-card">
+                <h3>User 1</h3>
+                <p>Status: Active</p>
+            </div>
+            <div class="user-card">
+                <h3>User 2</h3>
+                <p>Status: Inactive</p>
+            </div>
+            <div class="user-card">
+                <h3>User 3</h3>
+                <p>Status: Active</p>
+            </div>
+        </div>
+    </div>
+</div>
