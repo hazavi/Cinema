@@ -1,25 +1,38 @@
-<!--
+<nav class="nav-container">
+  <ul class="nav-links nav-start">
+    <li><a routerLink="/services" routerLinkActive="active">Films</a></li>
+    <li><a routerLink="/users" routerLinkActive="active">Users</a></li>
+    <li class="dropdown">
+      <a href="#">City</a>
+      <ul class="dropdown-menu">
+        <li><a href="#">New York</a></li>
+        <li><a href="#">Los Angeles</a></li>
+        <li><a href="#">Chicago</a></li>
+      </ul>
+    </li>
+  </ul>
 
-<h1>Welcome to {{ title }}</h1>
-<br>
-<!-- {{}} - interpolation 
-Hello {{ name }}, you're {{ age }} years old
+  <div class="logo-container">
+    <div class="logo" routerLink="/">
+      <img src="assets/bioma-logo.png" alt="Bioma Logo" style="height: 25px;">
+      Bioma
+    </div>
+  </div>
 
+  <div class="nav-end">
+    <a routerLink="/contact" routerLinkActive="active" >Admin</a>
+    <a routerLink="/contact" routerLinkActive="active" style="margin-left: 20px;">Login</a>
+  </div>
 
-<button (click)="sayHello2('John Wick')">Click</button>
+  <button class="mobile-menu" (click)="toggleMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</nav>
 
-<br>
-
-<input type="text" [(ngModel)]="name_input" placeholder="Enter your name">
-<button type="button" (click)="submit()">Submit</button>
-
-@if(sandt){
-  <p>Hello</p>
-}@else{
-  <p>Bye</p>
-}
--->
-
-
-
-<app-user></app-user>
+<div class="content">
+  <div class="page-wrapper">
+    <router-outlet></router-outlet>
+  </div>
+</div>

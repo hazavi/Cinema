@@ -4,10 +4,10 @@ import { Observable } from 'rxjs';
 import { Address } from '../models/address';
 
 const httpOptions = {
-    heades: new HttpHeaders({
-        'content-type': 'application/json'
-    })
-}
+  heades: new HttpHeaders({
+    'content-type': 'application/json',
+  }),
+};
 @Injectable({
   providedIn: 'root',
 })
@@ -22,8 +22,8 @@ export class GenericService<Model> {
   }
 
   // Get Model by ID
-  getbyid(endPoint: string, id: number): Observable<Model[]> {
-    return this.http.get<Model[]>(`${this.url}/${endPoint}/${id}`); // GET{Id}
+  getbyid(endPoint: string, id: number): Observable<Model> {
+    return this.http.get<Model>(`${this.url}/${endPoint}/${id}`); // GET{Id}
   }
 
   // Create Model

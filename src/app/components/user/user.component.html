@@ -1,25 +1,7 @@
-<!-- Form -->
-<form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="form-container">
-    <div>
-        <h2>Create User</h2>
-        <input type="text" id="firstName" formControlName="firstName" placeholder="First Name" />
-        <input type="text" id="lastName" formControlName="lastName" placeholder="Last Name" />
-        <input type="email" id="email" formControlName="email" placeholder="Email" />
-        <select id="postalCodeId" formControlName="postalCodeId" class="dropdown">
-            <option value="" disabled selected>Select Postal Code</option>
-            <option *ngFor="let postalCode of postalCodeList" [value]="postalCode.postalCodeId">
-                {{ postalCode.postalCodeId }} ({{ postalCode.name }})
-            </option>
-        </select>
-        <button type="submit" [disabled]="!userForm.valid" class="submit-btn">
-            Create User
-        </button>
-    </div>
-</form>
+<button routerLink="/create-user"> Create User</button>
 
 <div class="user-list-container">
     <h2>All Users</h2>
-    <button (click)="updateUser()">Update User</button>
     <table class="user-table">
         <thead>
             <tr>
@@ -37,28 +19,10 @@
                 <td>{{ user.email }}</td>
                 <td>{{ user.postalCodeId }}</td>
                 <td>
-                    <button class="btn1" (click)="deleteUser(user.userId)">Delete</button>
+                    <button class="btn1" [routerLink]="['/view-user', user.userId]">View</button>
+                    <button class="btn2" [routerLink]="['/update-user', user.userId]">Update</button>
+                    <button class="btn3" (click)="deleteUser(user.userId)">Delete</button>
                 </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-
-<div class="address-list-container">
-    <h2>All Addresses</h2>
-    <table class="address-table">
-        <thead>
-            <tr>
-                <th>Address ID</th>
-                <th>Street Name</th>
-                <th>Postal Code</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let address of addressList; let i = index" class="address-item">
-                <td>{{ address.addressId }}</td>
-                <td>{{ address.streetName }} {{ address.streetNumber }}</td>
-                <td>{{ address.postalCodeId }}</td>
             </tr>
         </tbody>
     </table>

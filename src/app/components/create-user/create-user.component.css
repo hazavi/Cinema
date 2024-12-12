@@ -1,0 +1,67 @@
+/* FORM CONTAINER */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Increased gap for better spacing */
+  max-width: 450px; /* Slightly larger container */
+  margin: 0 auto; /* Centered form */
+  background-color: #ffffff; /* Clean white background */
+  padding: 30px; /* More padding for a spacious feel */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Softer, wider shadow */
+}
+
+/* INPUTS AND SELECT */
+input,
+select {
+  width: 100%;
+  padding: 12px; /* Slightly increased padding for comfort */
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s, box-shadow 0.3s ease-in-out; /* Smooth transitions */
+}
+
+/* Focus Effect for Inputs and Select */
+input:focus,
+select:focus {
+  border-color: #3498db; /* Blue border on focus */
+  outline: none;
+  box-shadow: 0 0 8px rgba(52, 152, 219, 0.3); /* Blue glow effect */
+}
+
+/* PLACEHOLDER STYLE */
+::placeholder {
+  color: #aaa;
+  font-style: italic;
+}
+
+/* DROPDOWN STYLE */
+.dropdown {
+  appearance: none;
+  background: url("data:image/svg+xml;base64,...") no-repeat right 12px center; /* Adjusted position */
+  background-size: 16px; /* Slightly larger dropdown icon */
+}
+
+/* SUBMIT BUTTON */
+.submit-btn {
+  background-color: #4caf50; /* Green background */
+  color: white; /* White text */
+  padding: 12px 25px; /* Increased padding for larger button */
+  border: none; /* No border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor */
+  font-size: 16px; /* Consistent font size */
+  font-weight: bold; /* Make text bold for better visibility */
+  text-transform: uppercase; /* Uppercase text for consistency */
+  transition: background-color 0.3s ease, transform 0.2s ease-in-out; /* Smooth transitions */
+  width: 100%; /* Full width of the container */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Button hover effect */
+.submit-btn:hover {
+  background-color: #45a049; /* Darker green */
+  transform: translateY(-3px); /* Slight lift effect */
+}

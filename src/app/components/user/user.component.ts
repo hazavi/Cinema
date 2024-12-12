@@ -1,18 +1,18 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { User } from '../../models/user';
-import { UserService } from '../../service/user.service';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { AddressService } from '../../service/address.service';
 import { Address } from '../../models/address';
 import { GenericService } from '../../service/generic.service';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { PostalCode } from '../../models/postalcode';
+import { RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [CommonModule, CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, CommonModule, RouterModule],
   templateUrl: './user.component.html',
   styleUrl: './user.component.css',
 })
@@ -28,31 +28,12 @@ export class UserComponent {
   postalCodeList: PostalCode[] = [];
 
   constructor(
-    private service: UserService,
-    private addressService: AddressService,
+    private addressService: GenericService<Address>,
     private genericService: GenericService<User>,
     private postalService: GenericService<PostalCode>,
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) {}
-
-  // HTML Forms - Reactive Forms
-  userForm: FormGroup = new FormGroup({
-    userId: new FormControl(),
-    firstName: new FormControl(), // validators
-    lastName: new FormControl(),
-    email: new FormControl(),
-    postalCodeId: new FormControl(),
-  });
-
-  onSubmit(): void {
-    if (this.userForm.valid) {
-      const newUser = this.userForm.value;
-      this.genericService.create('Users', newUser).subscribe((response) => {
-        console.log('User Created Successfully', response);
-        // Redirect after success (optional)
-      });
-    }
-  }
 
   ngOnInit() {
     // console.log(this.getall());
@@ -74,10 +55,10 @@ export class UserComponent {
     });
 
     // Get All Address
-    this.addressService.getall().subscribe((data: Address[]) => {
-      this.addressList = data;
-      console.log('Fetched Address Data:', data);
-    });
+    // this.addressService.getall().subscribe((data: Address[]) => {
+    //   this.addressList = data;
+    //   console.log('Fetched Address Data:', data);
+    // });
     // Generic - Get All PostalCode
     this.postalService.getAll('PostalCodes').subscribe((data: PostalCode[]) => {
       this.postalCodeList = data;
@@ -89,12 +70,24 @@ export class UserComponent {
     //   console.log('Get User By Id:', data);
     // });
 
-    // Generic - Get user by id
-    this.genericService.getbyid('Users', 16).subscribe((data: User[]) => {
+    this.genericService.getbyid('Users', 16).subscribe((data: User) => {
       console.log('Fetched User By Id:', data);
     });
   }
-
+  // Generic - Get user by ID
+  viewUserById(id: number): void {
+    this.genericService.getbyid('Users', id).subscribe((data: User) => {
+        console.log(data); // Log the user data to the console
+        alert(
+          `User ID: ${data.userId} \nName: ${data.firstName} ${data.lastName} \nEmail: ${data.email}`
+        );
+      },
+      (error) => {
+        console.error('Error fetching user:', error);
+        alert('Failed to fetch user details. Please try again.');
+      }
+    );
+  }
   // Create User
   // createUser() {
   //   const newUser: User = {
@@ -112,20 +105,22 @@ export class UserComponent {
   // }
 
   // Update user by id
-  updateUser() {
-    const updatedUser: User = {
-      userId: 1,
-      firstName: 'Sasuke',
-      lastName: 'Uchiha',
-      email: 'sasuke.uchiha@clan.com',
-      postalCodeId: 2610,
-    };
-    this.genericService
-      .updatebyid('Users', 16, updatedUser)
-      .subscribe((updatedUser) => {
-        console.log('Updated User Successfully! ', updatedUser);
-      });
-  }
+  // updateUser() {
+  //   const updatedUser: User = {
+  //     userId: 1,
+  //     firstName: 'Sasuke',
+  //     lastName: 'Uchiha',
+  //     email: 'sasuke.uchiha@clan.com',
+  //     postalCodeId: 2610,
+  //   };
+  //   this.genericService
+  //     .updatebyid('Users', 16, updatedUser)
+  //     .subscribe((updatedUser) => {
+  //       console.log('Updated User Successfully! ', updatedUser);
+  //     });
+  // }
+
+  // Update user by id
 
   // Generic - Create User
   // createUser() {
@@ -146,6 +141,11 @@ export class UserComponent {
   deleteUser(id: number) {
     this.genericService.deletebyid('Users', id).subscribe(() => {
       console.log(`User with ID: ${id}, is deleted successfully`);
+    });
+  }
+  deleteAddress(id: number) {
+    this.addressService.deletebyid('Addresses', id).subscribe(() => {
+      console.log(`Address with ID: ${id}, is deleted successfully`);
     });
   }
   // Delete

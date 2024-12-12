@@ -1,0 +1,45 @@
+<div *ngIf="isLoading" class="loading-spinner">
+    Loading user details...
+</div>
+
+<div *ngIf="!isLoading && userDetails" class="update-user-form">
+    <h2>Update User</h2>
+
+    <form (ngSubmit)="updateUser()">
+        <div>
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" [(ngModel)]="userDetails.firstName" name="firstName" required />
+        </div>
+
+        <div>
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" [(ngModel)]="userDetails.lastName" name="lastName" required />
+        </div>
+
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" [(ngModel)]="userDetails.email" name="email" required />
+        </div>
+
+        <div>
+            <label for="postalCodeId">Postal Code:</label>
+            <select id="postalCodeId" [(ngModel)]="userDetails.postalCodeId" name="postalCodeId" class="dropdown"
+                required>
+                <option value="" disabled>Select Postal Code</option>
+                <option *ngFor="let postalCode of postalCodeList" [value]="postalCode.postalCodeId">
+                    {{ postalCode.postalCodeId }} ({{ postalCode.name }})
+                </option>
+            </select>
+
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update User</button>
+        <button type="button" class="btn btn-secondary" (click)="navigateToUser()">
+            Cancel
+        </button>
+    </form>
+</div>
+
+<div *ngIf="!isLoading && errorMessage" class="error-message">
+    <p>{{ errorMessage }}</p>
+</div>

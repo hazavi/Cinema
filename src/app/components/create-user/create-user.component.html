@@ -1,0 +1,18 @@
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="form-container">
+    <div>
+        <h2>Create User</h2>
+        <input type="text" id="firstName" formControlName="firstName" placeholder="First Name" />
+        <input type="text" id="lastName" formControlName="lastName" placeholder="Last Name" />
+        <input type="email" id="email" formControlName="email" placeholder="Email" />
+        <select id="postalCodeId" formControlName="postalCodeId" class="dropdown">
+            <option value="" disabled selected>Select Postal Code</option>
+            <option *ngFor="let postalCode of postalCodeList" [value]="postalCode.postalCodeId">
+                {{ postalCode.postalCodeId }} ({{ postalCode.name }})
+            </option>
+        </select>
+        <button type="submit" [disabled]="!userForm.valid" class="submit-btn">
+            Create User
+        </button>
+    </div>
+</form>
+
