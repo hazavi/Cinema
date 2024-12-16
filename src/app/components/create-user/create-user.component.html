@@ -1,18 +1,39 @@
 <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="form-container">
-    <div>
-        <h2>Create User</h2>
-        <input type="text" id="firstName" formControlName="firstName" placeholder="First Name" />
-        <input type="text" id="lastName" formControlName="lastName" placeholder="Last Name" />
-        <input type="email" id="email" formControlName="email" placeholder="Email" />
-        <select id="postalCodeId" formControlName="postalCodeId" class="dropdown">
-            <option value="" disabled selected>Select Postal Code</option>
-            <option *ngFor="let postalCode of postalCodeList" [value]="postalCode.postalCodeId">
-                {{ postalCode.postalCodeId }} ({{ postalCode.name }})
-            </option>
-        </select>
-        <button type="submit" [disabled]="!userForm.valid" class="submit-btn">
-            Create User
-        </button>
+    <h2>Create User</h2>
+    <label for="firstName">First Name:</label>
+    <input type="text" formControlName="firstName" placeholder="First Name" />
+    <div *ngIf="userForm.get('firstName')?.invalid && userForm.get('firstName')?.touched" class="error">
+        First Name is required.
     </div>
-</form>
 
+    <label for="lastName">Last Name:</label>
+    <input type="text" formControlName="lastName" placeholder="Last Name" />
+    <div *ngIf="userForm.get('lastName')?.invalid && userForm.get('lastName')?.touched" class="error">
+        Last Name is required.
+    </div>
+
+    <label for="email">Email:</label>
+    <input type="email" formControlName="email" placeholder="Email" />
+    <div *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched" class="error">
+        A valid email is required.
+    </div>
+
+    <label for="postalCodeId">Postal Code:</label>
+    <select formControlName="postalCodeId" class="dropdown">
+        <option value="" disabled selected>Select Postal Code</option>
+        <option *ngFor="let postalCode of postalCodeList" [value]="postalCode.postalCodeId">
+            {{ postalCode.postalCodeId }} ({{ postalCode.name }})
+        </option>
+    </select>
+    <div *ngIf="userForm.get('postalCodeId')?.invalid && userForm.get('postalCodeId')?.touched" class="error">
+        Postal code is required.
+    </div>
+
+    <button type="submit" class="submit-btn">
+        Create User
+    </button>
+
+    <button type="button" (click)="goBack()" class="back-btn">
+        Back
+    </button>
+</form>
