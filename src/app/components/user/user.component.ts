@@ -36,47 +36,21 @@ export class UserComponent {
   ) {}
 
   ngOnInit() {
-    // console.log(this.getall());
-    // this.userList = this.service.getall();
-    // console.log(this.userList);
-
-    // version 3
-    // this.service.getall3().subscribe((data) => console.log(data));
-
-    // this.service.getall3().subscribe((data: User[]) => {
-    //   this.userList = data;
-    //   console.log('Fetched User Data:', data);
-    // });
-
     // Generic - Get All User
     this.genericService.getAll('Users').subscribe((data: User[]) => {
       this.userList = data;
       console.log('Fetched User Data:', data);
     });
-
-    // Get All Address
-    // this.addressService.getall().subscribe((data: Address[]) => {
-    //   this.addressList = data;
-    //   console.log('Fetched Address Data:', data);
-    // });
     // Generic - Get All PostalCode
     this.postalService.getAll('PostalCodes').subscribe((data: PostalCode[]) => {
       this.postalCodeList = data;
       console.log('Fetched Postal Data', data);
     });
-
-    // Get user by id
-    // this.service.getbyid(14).subscribe((data: User[]) => {
-    //   console.log('Get User By Id:', data);
-    // });
-
-    this.genericService.getbyid('Users', 16).subscribe((data: User) => {
-      console.log('Fetched User By Id:', data);
-    });
   }
   // Generic - Get user by ID
   viewUserById(id: number): void {
-    this.genericService.getbyid('Users', id).subscribe((data: User) => {
+    this.genericService.getbyid('Users', id).subscribe(
+      (data: User) => {
         console.log(data); // Log the user data to the console
         alert(
           `User ID: ${data.userId} \nName: ${data.firstName} ${data.lastName} \nEmail: ${data.email}`

@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { GenericService } from '../../service/generic.service';
 import { PostalCode } from '../../models/postalcode';
 import { Movie } from '../../models/movie';
+import { Genre } from '../../models/genre';
 
 @Component({
   selector: 'app-admin',
@@ -17,20 +18,23 @@ export class AdminComponent {
   userList: User[] = [];
   postalCodeList: PostalCode[] = [];
   movieList: Movie[] = [];
+  genreList: Genre[] = [];
+  activeContent: string = 'dashboard'; // Default content to display
 
   constructor(
-    private genericService: GenericService<User>,
+    private userService: GenericService<User>,
     private postalService: GenericService<PostalCode>,
     private movieService: GenericService<Movie>,
+    private genreService: GenericService<Genre>,
     private router: Router
   ) {}
-
-  isDashboardContentVisible = true; // Dashboard content is visible by default
-  isUserContentVisible = false;
 
   currentPage = 1;
   itemsPerPage = 10;
 
+  showContent(content: string): void {
+    this.activeContent = content;
+  }
   get paginatedUsers() {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     const endIndex = startIndex + this.itemsPerPage;
@@ -45,22 +49,10 @@ export class AdminComponent {
       this.currentPage = page;
     }
   }
-  toggleUserContent() {
-    if (this.isDashboardContentVisible) {
-      this.isDashboardContentVisible = false;
-      this.isUserContentVisible = true;
-    }
-  }
 
-  toggleDashboardContent() {
-    if (this.isUserContentVisible) {
-      this.isUserContentVisible = false;
-      this.isDashboardContentVisible = true;
-    }
-  }
   ngOnInit() {
     // Generic - Get All Users
-    this.genericService.getAll('Users').subscribe((data: User[]) => {
+    this.userService.getAll('Users').subscribe((data: User[]) => {
       this.userList = data;
     });
     // Generic - Get All PostalCodes
@@ -71,12 +63,28 @@ export class AdminComponent {
     this.movieService.getAll('Movies').subscribe((data: Movie[]) => {
       this.movieList = data;
     });
+    // Generic - Get All Genre
+    this.genreService.getAll('Genres').subscribe((data: Genre[]) => {
+      this.genreList = data;
+    });
   }
 
   // Delete User
   deleteUser(id: number) {
-    this.genericService.deletebyid('Users', id).subscribe(() => {
+    this.userService.deletebyid('Users', id).subscribe(() => {
       alert(`User with ID: ${id}, is deleted successfully`);
+    });
+  }
+  // Delete Movie
+  deleteMovie(id: number) {
+    this.movieService.deletebyid('Movies', id).subscribe(() => {
+      alert(`Movie with ID: ${id}, is deleted successfully`);
+    });
+  }
+  // Delete Genre
+  deleteGenre(id: number) {
+    this.genreService.deletebyid('Genres', id).subscribe(() => {
+      alert(`Genre with ID: ${id}, is deleted successfully`);
     });
   }
 }

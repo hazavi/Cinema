@@ -1,3 +1,4 @@
+/* Form container */
 .form-container {
   max-width: 400px;
   margin: 2rem auto;
@@ -5,8 +6,10 @@
   background: var(--card-color);
   border-radius: 12px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 }
 
+/* Title */
 h2 {
   color: var(--text-color);
   font-size: 1.75rem;
@@ -14,37 +17,44 @@ h2 {
   margin-bottom: 1.5rem;
   text-align: center;
 }
-label{
+
+/* Labels */
+label {
   display: block;
   font-size: 1rem;
   font-weight: 500;
   color: var(--text-color);
   margin-bottom: 10px;
-
 }
 
+/* Inputs and selects */
 input,
 select {
   width: 100%;
-  padding: 0.7rem 0.5rem ;
+  padding: 0.7rem 0.5rem;
   margin-bottom: 1rem;
   border: 1px solid #e2e8f0;
   border-radius: 8px;
   font-size: 1rem;
   transition: border-color 0.2s, box-shadow 0.2s;
   background-color: #fff;
-
-  &:focus {
-    outline: none;
-    border-color: #4caf50;
-    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
-  }
-
-  &::placeholder {
-    color: #a0aec0;
-  }
 }
 
+/* Focus state for inputs and selects */
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #4caf50;
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+}
+
+/* Placeholder styling */
+input::placeholder,
+select::placeholder {
+  color: #a0aec0;
+}
+
+/* Select dropdown arrow */
 select {
   appearance: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%236B7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
@@ -54,6 +64,7 @@ select {
   padding-right: 2.5rem;
 }
 
+/* Buttons */
 button {
   width: 150px;
   padding: 0.75rem;
@@ -62,47 +73,68 @@ button {
   font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.2s, transform 0.1s;
+  transition: background-color 0.2s, transform 0.1s ease-in-out;
   margin-bottom: 0.75rem;
-
-
-  &:active {
-    transform: translateY(1px);
-  }
-
-  &:disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
-  }
 }
 
+/* Button hover effect */
+button:hover {
+  transform: scale(1.05);
+}
+
+/* Active state for buttons */
+button:active {
+  transform: translateY(1px);
+}
+
+/* Disabled button state */
+button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Submit button */
 .submit-btn {
   background-color: #4caf50;
   color: white;
-
-  &:hover:not(:disabled) {
-    background-color: #43a047;
-  }
 }
 
+.submit-btn:hover:not(:disabled) {
+  background-color: #43a047;
+}
+
+/* Back button */
 .back-btn {
   background-color: #ef4444;
   color: white;
-
-  &:hover {
-    background-color: #dc2626;
-  }
 }
+
+.back-btn:hover {
+  background-color: #dc2626;
+}
+
+/* Error message styling */
 .error {
   color: #ff2a2a;
   font-size: 0.8em;
   padding: 5px 10px;
   border-radius: 4px;
   display: inline-block;
+  margin-top: 5px;
 }
+
+/* Mobile responsiveness */
 @media (max-width: 640px) {
   .form-container {
     margin: 1rem;
     padding: 1.5rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  button {
+    width: 100%;
   }
 }

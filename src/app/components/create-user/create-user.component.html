@@ -1,5 +1,6 @@
 <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="form-container">
     <h2>Create User</h2>
+
     <label for="firstName">First Name:</label>
     <input type="text" formControlName="firstName" placeholder="First Name" />
     <div *ngIf="userForm.get('firstName')?.invalid && userForm.get('firstName')?.touched" class="error">
@@ -29,11 +30,19 @@
         Postal code is required.
     </div>
 
-    <button type="submit" class="submit-btn">
-        Create User
-    </button>
+    <label for="password">Password:</label>
+    <input type="password" formControlName="password" placeholder="Password" />
+    <div *ngIf="userForm.get('password')?.invalid && userForm.get('password')?.touched" class="error">
+        Password is required (min 6 characters).
+    </div>
 
-    <button type="button" (click)="goBack()" class="back-btn">
-        Back
-    </button>
+    <label for="confirmPassword">Confirm Password:</label>
+    <input type="password" formControlName="confirmPassword" placeholder="Confirm Password" />
+    <div *ngIf="userForm.get('confirmPassword')?.invalid && userForm.get('confirmPassword')?.touched" class="error">
+        Passwords must match.
+    </div>
+
+    <button type="submit" class="submit-btn" [disabled]="userForm.invalid">Create User</button>
+
+    <button type="button" (click)="goBack()" class="back-btn">Back</button>
 </form>

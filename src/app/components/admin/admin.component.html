@@ -1,45 +1,52 @@
 <div class="dashboard-container">
+    <!-- Sidebar -->
     <div class="sidebar">
         <h2>Admin Panel</h2>
         <ul>
             <li>
-                <div (click)="toggleDashboardContent()">Dashboard</div>
+                <div (click)="showContent('dashboard')">Dashboard</div>
             </li>
             <li>
-                <div (click)="toggleUserContent()">Users</div>
+                <div (click)="showContent('users')">Users</div>
             </li>
-            <li><a href="#">Movies</a></li>
-            <li><a href="#">Settings</a></li>
+            <li>
+                <div (click)="showContent('movies')">Movies</div>
+            </li>
+            <li>
+                <div (click)="showContent('genres')">Genres</div>
+            </li>
             <li><a href="#">Logout</a></li>
         </ul>
     </div>
+
+    <!-- Main Content -->
     <div class="content">
-        <div *ngIf="isDashboardContentVisible" class="dashboard-content">
+        <!-- Dashboard Content -->
+        <div *ngIf="activeContent === 'dashboard'" class="dashboard-content">
             <h1>Dashboard</h1>
             <div class="stats">
                 <div class="stat-card">
                     <h3>Users</h3>
-                    <p>{{userList.length}}</p>
+                    <p>{{ userList.length }}</p>
                 </div>
                 <div class="stat-card">
                     <h3>Movies</h3>
-                    <p>{{movieList.length}}</p>
+                    <p>{{ movieList.length }}</p>
                 </div>
                 <div class="stat-card">
                     <h3>Reports</h3>
                     <p>100</p>
                 </div>
             </div>
-            <div class="chart-section">
-                <h2>Analytics</h2>
-                <div class="chart-placeholder">[Chart Placeholder]</div>
-            </div>
         </div>
-        <div *ngIf="isUserContentVisible" class="user-content">
+
+        <!-- User Content -->
+        <div *ngIf="activeContent === 'users'" class="user-content">
             <div class="header">
                 <h2>All Users</h2>
                 <button class="create-user-btn" routerLink="/create-user">+ Create User</button>
             </div>
+            <!-- User Table -->
             <table class="user-table">
                 <thead>
                     <tr>
@@ -47,6 +54,7 @@
                         <th>Name</th>
                         <th>Email</th>
                         <th>Postal Code</th>
+                        <th>isAdmin?</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -56,29 +64,80 @@
                         <td>{{ user.firstName }} {{ user.lastName }}</td>
                         <td>{{ user.email }}</td>
                         <td>{{ user.postalCodeId }}</td>
+                        <td>{{ user.isAdmin }}</td>
                         <td>
                             <button class="btn btn-view" [routerLink]="['/view-user', user.userId]">View</button>
                             <button class="btn btn-update" [routerLink]="['/update-user', user.userId]">Update</button>
                             <button class="btn btn-delete" (click)="deleteUser(user.userId)">Delete</button>
                         </td>
                     </tr>
-
                 </tbody>
             </table>
-            <div class="pagination">
-                <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">
-                    Previous
-                </button>
-                <span *ngFor="let page of [].constructor(totalPages); let i = index">
-                    <button (click)="goToPage(i + 1)" [class.active]="currentPage === i + 1">
-                        {{ i + 1 }}
-                    </button>
-                </span>
-                <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">
-                    Next
-                </button>
-            </div>
         </div>
 
+        <!-- Movie Content -->
+        <div *ngIf="activeContent === 'movies'" class="movie-content">
+            <h2>Movies</h2>
+            <button class="add-movie-btn" routerLink="/add-movie">+ Add Movie</button>
+            <!-- Movie Table -->
+            <table class="movie-table">
+                <thead>
+                    <tr>
+                        <th>Movie ID</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Duration</th>
+                        <th>Rating</th>
+                        <th>Genre</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let movie of movieList" class="movie-item">
+                        <td>{{ movie.movieId }}</td>
+                        <td>{{ movie.title }}</td>
+                        <td>{{ movie.description }}</td>
+                        <td>{{ movie.durationMinutes }} min</td>
+                        <td>{{ movie.rating }}</td>
+                        <td>{{ movie.genres }}</td>
+                        <td>
+                            <button class="btn btn-view" [routerLink]="['/view-movie', movie.movieId]">View</button>
+                            <button class="btn btn-update"
+                                [routerLink]="['/update-movie', movie.movieId]">Update</button>
+                            <button class="btn btn-delete" (click)="deleteMovie(movie.movieId)">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Genres Content -->
+        <div *ngIf="activeContent === 'genres'" class="genres-content">
+            <h2>Genres</h2>
+            <button class="create-genre-btn" routerLink="/create-genre">+ Add Genre</button>
+            <!-- Genre Table -->
+            <table class="genre-table">
+                <thead>
+                    <tr>
+                        <th>GenreId</th>
+                        <th>Genre Name</th>
+                        <th>Movies</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let genre of genreList" class="genre-item">
+                        <td>{{ genre.genreId }}</td>
+                        <td>{{ genre.genreName }}</td>
+                        <td>{{ genre.movies }}</td>
+                        <td>
+                            <button class="btn btn-view" [routerLink]="['/view-genre', genre.genreId]">View</button>
+                            <button class="btn btn-update"
+                                [routerLink]="['/update-genre', genre.genreId]">Update</button>
+                            <button class="btn btn-delete" (click)="deleteGenre(genre.genreId)">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>

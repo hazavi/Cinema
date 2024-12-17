@@ -45,11 +45,14 @@ export class CreateUserComponent {
   onSubmit(): void {
     if (this.userForm.valid) {
       const newUser = this.userForm.value;
+      newUser.isAdmin = false;
+      newUser.passwordHash = ''; // Initially, password hash will be empty
+      newUser.passwordSalt = '';
       this.userService.create('Users', newUser).subscribe(
         (response) => {
           console.log('User Created Successfully', response);
           alert('User Created Successfully');
-          this.router.navigate(['/users']); // Redirect after success
+          this.router.navigate(['/admin']); // Redirect after success
         },
         (error) => {
           console.error('Error creating user:', error);
@@ -67,18 +70,25 @@ export class CreateUserComponent {
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       postalCodeId: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(6)]], // Password field with validation
+      confirmPassword: ['', [Validators.required, this.passwordMatchValidator]], // Confirm password field
     });
 
     // Generic - Get All User
     this.userService.getAll('Users').subscribe((data: User[]) => {
       this.userList = data;
-      console.log('Fetched User Data:', data);
     });
 
     // Generic - Get All PostalCode
     this.postalService.getAll('PostalCodes').subscribe((data: PostalCode[]) => {
       this.postalCodeList = data;
-      console.log('Fetched Postal Data', data);
     });
+  }
+  // Custom validator to check if the password and confirm password match
+  passwordMatchValidator(
+    control: FormControl
+  ): { [key: string]: boolean } | null {
+    const password = control.root?.get('password')?.value;
+    return password && password !== control.value ? { mismatch: true } : null;
   }
 }

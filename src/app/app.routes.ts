@@ -6,16 +6,22 @@ import { ViewUserComponent } from './components/view-user/view-user.component';
 import { UpdateUserComponent } from './components/update-user/update-user.component';
 import { LoginComponent } from './components/login/login.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { ShowingComponent } from './components/showing/showing.component';
+import { CreateMovieComponent } from './components/create-movie/create-movie.component';
+import { CreateGenreComponent } from './components/create-genre/create-genre.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' }, // home
   { path: 'login', component: LoginComponent }, // Login Page
   { path: 'admin', component: AdminComponent }, // Admin Page
   { path: 'home', component: HomeComponent }, // Home Page
+  { path: 'showing', component: ShowingComponent }, // Showing Page
   { path: 'users', component: UserComponent }, // User list page
+  { path: 'add-movie', component: CreateMovieComponent }, // Create movie form
   { path: 'create-user', component: CreateUserComponent }, // Create user form
-  { path: 'view-user/:id', component: ViewUserComponent }, // view user 
-  { path: 'update-user/:id', component: UpdateUserComponent }, // update user 
+  { path: 'create-genre', component: CreateGenreComponent }, // Create user form
+  { path: 'view-user/:id', component: ViewUserComponent }, // view user
+  { path: 'update-user/:id', component: UpdateUserComponent }, // update user
 ];
 
 // import { NgModule } from '@angular/core';

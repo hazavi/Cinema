@@ -1,0 +1,24 @@
+<form [formGroup]="genreForm" (ngSubmit)="onSubmit()" class="form-container">
+    <h2>Create Genre</h2>
+
+    <!-- Genre Name -->
+    <label for="genreName">Genre Name:</label>
+    <input type="text" formControlName="genreName" placeholder="Enter Genre Name" />
+    <div *ngIf="genreForm.get('genreName')?.invalid && genreForm.get('genreName')?.touched" class="error">
+        Genre name is required.
+    </div>
+
+    <!-- Optional Movies Field -->
+    <label for="movies">Movies (Optional):</label>
+    <select formControlName="movies" class="dropdown" multiple placeholder="Select Movies">
+        <option *ngFor="let movie of movieList" [value]="movie.movieId"> 
+            {{ movie.title }} ({{ movie.durationMinutes }} min)
+        </option>
+    </select>
+
+    <!-- Submit and Back Buttons -->
+    <button type="submit" class="submit-btn" [disabled]="genreForm.invalid">
+        Create Genre
+    </button>
+    <button type="button" (click)="goBack()" class="back-btn">Back</button>
+</form>
