@@ -4,50 +4,35 @@
     <!-- Title -->
     <label for="title">Title:</label>
     <input type="text" formControlName="title" placeholder="Title" />
-    <div *ngIf="movieForm.get('title')?.invalid && movieForm.get('title')?.touched" class="error">
-        Title is required.
-    </div>
 
     <!-- Description -->
     <label for="description">Description:</label>
     <input type="text" formControlName="description" placeholder="Description" />
-    <div *ngIf="movieForm.get('description')?.invalid && movieForm.get('description')?.touched" class="error">
-        Description is required and must be less than 250 characters.
-    </div>
 
     <!-- Duration -->
     <label for="durationMinutes">Duration (Minutes):</label>
     <input type="number" formControlName="durationMinutes" placeholder="Duration Minutes" />
-    <div *ngIf="movieForm.get('durationMinutes')?.invalid && movieForm.get('durationMinutes')?.touched" class="error">
-        Duration is required.
-    </div>
 
     <!-- Rating -->
     <label for="rating">Rating:</label>
-    <input type="number" formControlName="rating" placeholder="Rating" />
-    <div *ngIf="movieForm.get('rating')?.invalid && movieForm.get('rating')?.touched" class="error">
-        Rating is required (1-10).
-    </div>
+    <input type="number" formControlName="rating" placeholder="Rating" min="1" max="10" />
 
     <!-- Release Date -->
     <label for="releaseDate">Release Date:</label>
     <input type="date" formControlName="releaseDate" />
-    <div *ngIf="movieForm.get('releaseDate')?.invalid && movieForm.get('releaseDate')?.touched" class="error">
-        Release Date is required.
-    </div>
 
     <!-- Genres -->
-    <label for="genres">Genres:</label>
-    <select formControlName="genres" class="dropdown" multiple>
-        <option *ngFor="let genre of genreList" [value]="genre.genreId">
+    <div *ngFor="let genre of genreList">
+        <label>
+            <input type="checkbox" (change)="onGenreChange($event, genre.genreId)" [value]="genre.genreId" />
             {{ genre.genreName }}
-        </option>
-    </select>
-    <div *ngIf="movieForm.get('genres')?.invalid && movieForm.get('genres')?.touched" class="error">
-        At least one genre is required.
+        </label>
     </div>
 
-    <!-- Buttons -->
+
+
+    <!-- Submit -->
     <button type="submit" class="submit-btn" [disabled]="movieForm.invalid || isSubmitting">Add Movie</button>
     <button type="button" (click)="goBack()" class="back-btn">Back</button>
+
 </form>

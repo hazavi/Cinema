@@ -1,4 +1,5 @@
 import { Genre } from './genre';
+import { MovieGenre } from './moviegenre';
 
 export class Movie {
   movieId: number = 0;
@@ -7,5 +8,5 @@ export class Movie {
   durationMinutes: number = 0;
   rating: number = 0;
   releaseDate: Date = new Date();
-  genres: Genre[] = [];
+  movieGenres: MovieGenre[] = [];
 }

@@ -9,6 +9,7 @@ import { AdminComponent } from './components/admin/admin.component';
 import { ShowingComponent } from './components/showing/showing.component';
 import { CreateMovieComponent } from './components/create-movie/create-movie.component';
 import { CreateGenreComponent } from './components/create-genre/create-genre.component';
+import { ViewMovieComponent } from './components/view-movie/view-movie.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' }, // home
@@ -18,6 +19,7 @@ export const routes: Routes = [
   { path: 'showing', component: ShowingComponent }, // Showing Page
   { path: 'users', component: UserComponent }, // User list page
   { path: 'add-movie', component: CreateMovieComponent }, // Create movie form
+  { path: 'view-movie/:id', component: ViewMovieComponent }, // view movie
   { path: 'create-user', component: CreateUserComponent }, // Create user form
   { path: 'create-genre', component: CreateGenreComponent }, // Create user form
   { path: 'view-user/:id', component: ViewUserComponent }, // view user

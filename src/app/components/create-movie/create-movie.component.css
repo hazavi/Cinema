@@ -61,6 +61,45 @@ select:focus {
   height: auto;
   overflow: auto;
 }
+/* Genre Section */
+.genre-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.genre-item {
+  display: flex;
+  align-items: center;
+}
+
+.genre-item input {
+  width: 20px; /* Increase size of the checkbox */
+  height: 20px; /* Adjust the height as well */
+  margin-right: 0.5rem;
+  transform: translateY(5px);
+  vertical-align: middle; /* Align checkbox with genre name */
+}
+
+.genre-name {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.5; /* Ensure the text is vertically aligned */
+}
+
+.genre-item input:checked + .genre-name {
+  color: #007bff;
+}
+
+.genre-item input:hover {
+  cursor: pointer;
+}
+
+.genre-item input:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
 
 /* Buttons */
 button {

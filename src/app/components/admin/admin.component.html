@@ -96,10 +96,9 @@
                     <tr *ngFor="let movie of movieList" class="movie-item">
                         <td>{{ movie.movieId }}</td>
                         <td>{{ movie.title }}</td>
-                        <td>{{ movie.description }}</td>
                         <td>{{ movie.durationMinutes }} min</td>
                         <td>{{ movie.rating }}</td>
-                        <td>{{ movie.genres }}</td>
+                        <td>{{ movie.movieGenres }}</td>
                         <td>
                             <button class="btn btn-view" [routerLink]="['/view-movie', movie.movieId]">View</button>
                             <button class="btn btn-update"
@@ -128,7 +127,7 @@
                     <tr *ngFor="let genre of genreList" class="genre-item">
                         <td>{{ genre.genreId }}</td>
                         <td>{{ genre.genreName }}</td>
-                        <td>{{ genre.movies }}</td>
+                        <!-- <td>{{ genre.movieGenres }}</td> -->
                         <td>
                             <button class="btn btn-view" [routerLink]="['/view-genre', genre.genreId]">View</button>
                             <button class="btn btn-update"
