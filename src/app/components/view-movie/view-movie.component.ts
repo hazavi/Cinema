@@ -49,11 +49,6 @@ export class ViewMovieComponent {
       (data: Movie) => {
         this.movieDetails = data;
 
-        // Extract genre names from movieGenres
-        this.genreNames =
-          data.movieGenres.map((mg) => mg.genreName).join(', ') ||
-          'No genres available.';
-
         this.isLoading = false;
       },
       (error) =>

@@ -8,5 +8,8 @@ export class Movie {
   durationMinutes: number = 0;
   rating: number = 0;
   releaseDate: Date = new Date();
-  movieGenres: MovieGenre[] = [];
+  genreIds: number[] = [];
+  // movieGenres: MovieGenre[] = [];
+  // Director
+  // Distributed by
 }

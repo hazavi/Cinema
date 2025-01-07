@@ -31,6 +31,13 @@ export class GenericService<Model> {
     return this.http.post<Model>(`${this.url}/${endPoint}`, model); // POST
   }
 
+  create2<T>(endPoint: string, model: T): Observable<T> {
+    return this.http.post<T>(`${this.url}/${endPoint}`, model); // POST
+  }
+  // Generic method to handle image upload
+  uploadImage(formData: FormData): Observable<any> {
+    return this.http.post<any>(`${this.url}/movies/upload-image`, formData); // POST
+  }
   // Update Model by ID
   updatebyid(endPoint: string, id: number, model: Model): Observable<Model> {
     return this.http.put<Model>(`${this.url}/${endPoint}/${id}`, model); // PUT
