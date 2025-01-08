@@ -1,18 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { Movie } from '../../models/movie';
-import { CommonModule } from '@angular/common';
-import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { GenericService } from '../../service/generic.service';
-import { RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 import { Genre } from '../../models/genre';
-import { MovieGenre } from '../../models/moviegenre';
-import { Title } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-create-movie',
-  standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './create-movie.component.html',
   styleUrls: ['./create-movie.component.css'],
 })
@@ -21,10 +22,15 @@ export class CreateMovieComponent implements OnInit {
   genres: Genre[] = [];
 
   constructor(
-    private movieService: GenericService<Movie>,
-    private genreService: GenericService<Genre>
+    private movieService: GenericService<any>,
+    private genreService: GenericService<Genre>,
+    private router: Router
   ) {
     this.movieForm = new FormGroup({
+      posterUrl: new FormControl('', [
+        Validators.required,
+        Validators.pattern('public/posters/.+'),
+      ]),
       title: new FormControl('', Validators.required),
       description: new FormControl('', Validators.required),
       durationMinutes: new FormControl('', [
@@ -38,66 +44,50 @@ export class CreateMovieComponent implements OnInit {
       ]),
       releaseDate: new FormControl('', Validators.required),
       genreIds: new FormControl([], Validators.required),
+      isShowing: new FormControl(false),
     });
   }
 
   ngOnInit(): void {
-    this.genreService.getAll('Genres').subscribe(
-      (data: Genre[]) => {
-        this.genres = data;
-      },
-      (error) => {
-        console.error('Error fetching genres:', error);
-      }
-    );
-  }
-
-  logSelectedGenres(selectedGenres: any[]): void {
-    console.log('Selected genres:', selectedGenres);
+    this.genreService
+      .getAll('Genres')
+      .subscribe((data) => (this.genres = data));
   }
 
   onSubmit(): void {
-    if (this.movieForm.invalid) {
-      console.log('Form is invalid:', this.movieForm.errors); // Debugging form errors
-      return; // Early exit if form is invalid
-    }
+    if (this.movieForm.invalid) return;
 
-    // Log the form data to see what's being sent
-    console.log('Form Values:', this.movieForm.value);
-
-    const genreIds: number[] = this.movieForm.value.genreIds;
-
-    // Create the payload to send to the backend
+    const {
+      posterUrl,
+      title,
+      description,
+      durationMinutes,
+      rating,
+      releaseDate,
+      genreIds,
+      isShowing,
+    } = this.movieForm.value;
     const payload = {
-      title: this.movieForm.value.title,
-      description: this.movieForm.value.description,
-      durationMinutes: this.movieForm.value.durationMinutes,
-      rating: this.movieForm.value.rating,
-      releaseDate: new Date(this.movieForm.value.releaseDate)
-        .toISOString()
-        .split('T')[0], // Trim the time part
-      genreIds: genreIds,
+      posterUrl,
+      title,
+      description,
+      durationMinutes,
+      rating,
+      releaseDate: new Date(releaseDate).toISOString().split('T')[0],
+      genreIds,
+      isShowing,
     };
 
-    console.log('Payload:', payload);
-
     this.movieService.create2('Movies', payload).subscribe(
-      (response) => {
+      () => {
         alert('Movie created successfully');
-        this.resetForm();
+        this.movieForm.reset();
+        this.router.navigate(['/admin']);
       },
       (error) => {
         alert('Error creating movie');
-        console.error('Error:', error);
-        // Log additional error details if available
-        if (error?.error?.message) {
-          console.error('Backend message:', error.error.message);
-        }
+        console.error(error);
       }
     );
-  }
-
-  resetForm(): void {
-    this.movieForm.reset();
   }
 }

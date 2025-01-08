@@ -19,6 +19,8 @@
 label {
   font-weight: bold;
   color: #333;
+  display: block;
+  margin-bottom: 5px;
 }
 
 input,
@@ -59,4 +61,26 @@ button:disabled {
   color: red;
   font-size: 12px;
   margin-top: 5px;
+}
+
+input[type="checkbox"] {
+  width: auto;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.form-group.checkbox-group {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox-group label {
+  margin-bottom: 0;
+}
+
+.checkbox-group input[type="checkbox"] {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+  transform: scale(1.5);
 }

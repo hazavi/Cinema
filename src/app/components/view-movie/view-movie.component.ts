@@ -15,7 +15,7 @@ import { CommonModule } from '@angular/common';
 })
 export class ViewMovieComponent {
   movieId!: number;
-  movieDetails!: Movie | null;
+  movieDetails: Movie | null = null;
   genres: Genre[] = [];
   genreNames: string = '';
   isLoading: boolean = true;
@@ -23,32 +23,29 @@ export class ViewMovieComponent {
 
   constructor(
     private route: ActivatedRoute,
-    private genericMovieService: GenericService<Movie>, // Correct service for movies
-    private genericGenreService: GenericService<Genre>, // Correct service for genres
-    private genericMovieGenreService: GenericService<MovieGenre> // Service for movie-genre relations
+    private movieService: GenericService<Movie>,
+    private genreService: GenericService<Genre>,
+    private movieGenreService: GenericService<MovieGenre>
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe((params) => {
-      this.movieId = +params['id'];
+    this.route.params.subscribe(({ id }) => {
+      this.movieId = +id;
       this.fetchMovieDetails();
       this.fetchGenresForMovie();
     });
   }
 
-  // Consolidated error handling function
   private handleError(message: string, error: any): void {
     console.error(message, error);
     this.errorMessage = message;
     this.isLoading = false;
   }
 
-  // Fetch movie details
-  fetchMovieDetails(): void {
-    this.genericMovieService.getbyid('Movies', this.movieId).subscribe(
-      (data: Movie) => {
+  private fetchMovieDetails(): void {
+    this.movieService.getbyid('Movies', this.movieId).subscribe(
+      (data) => {
         this.movieDetails = data;
-
         this.isLoading = false;
       },
       (error) =>
@@ -59,53 +56,11 @@ export class ViewMovieComponent {
     );
   }
 
-  // Fetch genres based on movie genres (movieId and genreId mapping)
-  fetchGenresForMovie(): void {
-    // Fetch all genres and movie-genre relations
-    this.genericGenreService.getAll('Genres').subscribe(
-      (allGenres: Genre[]) => {
-        console.log('All genres fetched:', allGenres); // Debug log
+  private fetchGenresForMovie(): void {
+    this.genreService.getAll('Genres').subscribe(
+      (allGenres) => {
         this.genres = allGenres;
-
-        // Fetch the movie-genre relations
-        this.genericMovieGenreService.getAll('MovieGenres').subscribe(
-          (movieGenres: MovieGenre[]) => {
-            console.log('Movie genres fetched:', movieGenres); // Debug log
-
-            // Filter movieGenres to find those associated with the current movie
-            const movieGenreIds = movieGenres
-              .filter((mg) => mg.movieId === this.movieId)
-              .map((mg) => mg.genreId);
-
-            console.log('Filtered movie genre IDs:', movieGenreIds); // Debug log
-
-            if (movieGenreIds.length === 0) {
-              console.log('No genres found for this movie.');
-              this.genreNames = 'No genres available.';
-              this.isLoading = false;
-              return;
-            }
-
-            // Map genre IDs to genre names
-            this.genreNames = this.genres
-              .filter((genre) => movieGenreIds.includes(genre.genreId))
-              .map((genre) => genre.genreName)
-              .join(', ');
-
-            console.log('Mapped genre names:', this.genreNames); // Debug log
-
-            if (!this.genreNames) {
-              this.genreNames = 'No genres available.';
-            }
-
-            this.isLoading = false;
-          },
-          (error) =>
-            this.handleError(
-              'Failed to fetch movie genres. Please try again later.',
-              error
-            )
-        );
+        this.fetchMovieGenres();
       },
       (error) =>
         this.handleError(
@@ -113,5 +68,39 @@ export class ViewMovieComponent {
           error
         )
     );
+  }
+
+  private fetchMovieGenres(): void {
+    this.movieGenreService.getAll('MovieGenre').subscribe(
+      (movieGenres) => {
+        const movieGenreIds = movieGenres
+          .filter((mg) => mg.movieId === this.movieId)
+          .map((mg) => mg.genreId);
+
+        // Assign genre names to the movie
+        this.genreNames = movieGenreIds.length
+          ? this.getGenreNames(movieGenreIds)
+          : 'No genres available.';
+
+        // Update movieDetails with genreNames
+        if (this.movieDetails) {
+          this.movieDetails.genreNames = this.genreNames;
+        }
+        
+        this.isLoading = false;
+      },
+      (error) =>
+        this.handleError(
+          'Failed to fetch movie genres. Please try again later.',
+          error
+        )
+    );
+  }
+
+  private getGenreNames(genreIds: number[]): string {
+    return this.genres
+      .filter((genre) => genreIds.includes(genre.genreId))
+      .map((genre) => genre.genreName)
+      .join(', ');
   }
 }

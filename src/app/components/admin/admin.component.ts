@@ -7,6 +7,7 @@ import { GenericService } from '../../service/generic.service';
 import { PostalCode } from '../../models/postalcode';
 import { Movie } from '../../models/movie';
 import { Genre } from '../../models/genre';
+import { MovieGenre } from '../../models/moviegenre';
 
 @Component({
   selector: 'app-admin',
@@ -20,12 +21,14 @@ export class AdminComponent {
   movieList: Movie[] = [];
   genreList: Genre[] = [];
   activeContent: string = 'dashboard'; // Default content to display
+  movieGenreList: MovieGenre[] = [];
 
   constructor(
     private userService: GenericService<User>,
     private postalService: GenericService<PostalCode>,
     private movieService: GenericService<Movie>,
     private genreService: GenericService<Genre>,
+    private movieGenreService: GenericService<MovieGenre>,
     private router: Router
   ) {}
 
@@ -67,7 +70,15 @@ export class AdminComponent {
     this.genreService.getAll('Genres').subscribe((data: Genre[]) => {
       this.genreList = data;
     });
+    // Generic - Get All MovieGenre
+    this.movieGenreService
+      .getAll('MovieGenre')
+      .subscribe((data: MovieGenre[]) => {
+        this.movieGenreList = data;
+      });
   }
+
+  // Delete operations
 
   // Delete User
   deleteUser(id: number) {

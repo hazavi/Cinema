@@ -87,7 +87,6 @@
                         <th>Title</th>
                         <th>Duration</th>
                         <th>Rating</th>
-                        <th>Genre</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -97,7 +96,6 @@
                         <td>{{ movie.title }}</td>
                         <td>{{ movie.durationMinutes }} min</td>
                         <td>{{ movie.rating }}</td>
-                        <td>{{ movie.genreIds }}</td>
                         <td>
                             <button class="btn btn-view" [routerLink]="['/view-movie', movie.movieId]">View</button>
                             <button class="btn btn-update"

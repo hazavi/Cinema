@@ -7,6 +7,7 @@
 <div *ngIf="!isLoading && movieDetails" class="movie-details">
     <h2>Movie Details</h2>
     <p><strong>Movie ID:</strong> {{ movieDetails.movieId }}</p>
+    <p><strong>Poster:</strong> {{ movieDetails.posterUrl }}</p>
     <p><strong>Title:</strong> {{ movieDetails.title }}</p>
 
     <p><strong>Description:</strong></p>
@@ -16,7 +17,8 @@
     <p><strong>Rating:</strong> {{ movieDetails.rating }}</p>
     <p><strong>Release Date:</strong> {{ movieDetails.releaseDate | date: 'mediumDate' }}</p>
 
-    <p><strong>Genres:</strong> {{ movieDetails.genreIds }}</p>
+    <p><strong>Genres:</strong> {{ movieDetails.genreNames }}</p>
+    <p><strong>isShowing?:</strong> {{ movieDetails.isShowing }}</p>
 </div>
 
 <!-- Error Message -->
