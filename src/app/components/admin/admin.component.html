@@ -15,6 +15,15 @@
             <li>
                 <div (click)="showContent('genres')">Genres</div>
             </li>
+            <li>
+                <div (click)="showContent('theaters')">Theaters</div>
+            </li>
+            <li>
+                <div (click)="showContent('addresses')">Address</div>
+            </li>
+            <li>
+                <div (click)="showContent('postalCodes')">Postal Codes</div>
+            </li>
             <li><a href="#">Logout</a></li>
         </ul>
     </div>
@@ -34,8 +43,8 @@
                     <p>{{ movieList.length }}</p>
                 </div>
                 <div class="stat-card">
-                    <h3>Reports</h3>
-                    <p>100</p>
+                    <h3>Genres</h3>
+                    <p>{{ genreList.length }}</p>
                 </div>
             </div>
         </div>
@@ -44,7 +53,7 @@
         <div *ngIf="activeContent === 'users'" class="user-content">
             <div class="header">
                 <h2>All Users</h2>
-                <button class="create-user-btn" routerLink="/create-user">+ Create User</button>
+                <button class="create-btn" routerLink="/create-user">+ Create User</button>
             </div>
             <!-- User Table -->
             <table class="user-table">
@@ -59,7 +68,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let user of paginatedUsers" class="user-item">
+                    <tr *ngFor="let user of paginatedUsers" class="model-item">
                         <td>{{ user.userId }}</td>
                         <td>{{ user.firstName }} {{ user.lastName }}</td>
                         <td>{{ user.email }}</td>
@@ -78,7 +87,7 @@
         <!-- Movie Content -->
         <div *ngIf="activeContent === 'movies'" class="movie-content">
             <h2>Movies</h2>
-            <button class="add-movie-btn" routerLink="/add-movie">+ Add Movie</button>
+            <button class="create-btn add-movie-btn" routerLink="/add-movie">+ Add Movie</button>
             <!-- Movie Table -->
             <table class="movie-table">
                 <thead>
@@ -87,15 +96,17 @@
                         <th>Title</th>
                         <th>Duration</th>
                         <th>Rating</th>
+                        <th>isShowing?</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let movie of movieList" class="movie-item">
+                    <tr *ngFor="let movie of movieList" class="model-item">
                         <td>{{ movie.movieId }}</td>
                         <td>{{ movie.title }}</td>
                         <td>{{ movie.durationMinutes }} min</td>
                         <td>{{ movie.rating }}</td>
+                        <td>{{ movie.isShowing }}</td>
                         <td>
                             <button class="btn btn-view" [routerLink]="['/view-movie', movie.movieId]">View</button>
                             <button class="btn btn-update"
@@ -110,7 +121,7 @@
         <!-- Genres Content -->
         <div *ngIf="activeContent === 'genres'" class="genres-content">
             <h2>Genres</h2>
-            <button class="create-genre-btn" routerLink="/create-genre">+ Add Genre</button>
+            <button class="create-btn" routerLink="/create-genre">+ Add Genre</button>
             <!-- Genre Table -->
             <table class="genre-table">
                 <thead>
@@ -121,7 +132,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let genre of genreList" class="genre-item">
+                    <tr *ngFor="let genre of genreList" class="model-item">
                         <td>{{ genre.genreId }}</td>
                         <td>{{ genre.genreName }}</td>
                         <!-- <td>{{ genre.movieGenres }}</td> -->
@@ -130,6 +141,103 @@
                             <button class="btn btn-update"
                                 [routerLink]="['/update-genre', genre.genreId]">Update</button>
                             <button class="btn btn-delete" (click)="deleteGenre(genre.genreId)">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+        <!-- Theater Content -->
+        <div *ngIf="activeContent === 'theaters'" class="theater-content">
+            <h2>Theaters</h2>
+            <button class="create-btn" routerLink="/create-theater">+ Add Theater</button>
+            <!-- Theater Table -->
+            <table class="theater-table">
+                <thead>
+                    <tr>
+                        <th>Theater Id</th>
+                        <th>Name</th>
+                        <th>Capacity</th>
+                        <th>Location</th>
+                        <th>Address Id</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let t of theaterList" class="model-item">
+                        <td>{{ t.theaterId }}</td>
+                        <td>{{ t.name }}</td>
+                        <td>{{ t.capacity }}</td>
+                        <td>{{ t.location }}</td>
+                        <td>{{ t.addressId }}</td>
+                        <td>
+                            <button class="btn btn-view" [routerLink]="['/view-theater', t.theaterId]">View</button>
+                            <button class="btn btn-update"
+                                [routerLink]="['/update-theater', t.theaterId]">Update</button>
+                            <button class="btn btn-delete" (click)="deleteTheater(t.theaterId)">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+        <!-- Address Content -->
+        <div *ngIf="activeContent === 'addresses'" class="address-content">
+            <h2>Addresses</h2>
+            <button class="create-btn" routerLink="/create-address">+ Add Address</button>
+            <!-- Address Table -->
+            <table class="address-table">
+                <thead>
+                    <tr>
+                        <th>Adress Id</th>
+                        <th>Street Number</th>
+                        <th>Street Name</th>
+                        <th>Postal Code</th>
+                        <th>Postal Name</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let a of addressList" class="model-item">
+                        <td>{{ a.addressId }}</td>
+                        <td>{{ a.streetNumber }}</td>
+                        <td>{{ a.streetName }}</td>
+                        <td>{{ a.postalCodeId }}</td>
+                        <td>{{ getPostalName(a.postalCodeId) }}</td>
+                        <td>
+                            <button class="btn btn-view" [routerLink]="['/view-address', a.addressId]">View</button>
+                            <button class="btn btn-update"
+                                [routerLink]="['/update-address', a.addressId]">Update</button>
+                            <button class="btn btn-delete" (click)="deleteAddress(a.addressId)">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- Postal Code Content -->
+        <div *ngIf="activeContent === 'postalCodes'" class="address-content">
+            <h2>Postal Codes</h2>
+            <button class="create-btn" routerLink="/create-postalcode">+ Add Postal-Code</button>
+            <!-- Theater Table -->
+            <table class="PostalCode-table">
+                <thead>
+                    <tr>
+                        <th>Postal Code Id</th>
+                        <th>Name</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let p of postalCodeList" class="model-item">
+                        <td>{{ p.postalCodeId }}</td>
+                        <td>{{ p.name }}</td>
+                        <td>
+                            <button class="btn btn-view"
+                                [routerLink]="['/view-postalcode', p.postalCodeId]">View</button>
+                            <button class="btn btn-update" [routerLink]="['/update-postalcode', p.name]">Update</button>
+                            <button class="btn btn-delete" (click)="deletePostalCode(p.postalCodeId)">Delete</button>
                         </td>
                     </tr>
                 </tbody>

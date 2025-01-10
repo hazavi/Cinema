@@ -8,6 +8,8 @@ import { PostalCode } from '../../models/postalcode';
 import { Movie } from '../../models/movie';
 import { Genre } from '../../models/genre';
 import { MovieGenre } from '../../models/moviegenre';
+import { Address } from '../../models/address';
+import { Theater } from '../../models/theater';
 
 @Component({
   selector: 'app-admin',
@@ -20,8 +22,10 @@ export class AdminComponent {
   postalCodeList: PostalCode[] = [];
   movieList: Movie[] = [];
   genreList: Genre[] = [];
-  activeContent: string = 'dashboard'; // Default content to display
   movieGenreList: MovieGenre[] = [];
+  addressList: Address[] = [];
+  theaterList: Theater[] = [];
+  activeContent: string = 'dashboard'; // Default content to display
 
   constructor(
     private userService: GenericService<User>,
@@ -29,6 +33,8 @@ export class AdminComponent {
     private movieService: GenericService<Movie>,
     private genreService: GenericService<Genre>,
     private movieGenreService: GenericService<MovieGenre>,
+    private addressService: GenericService<Address>,
+    private theaterService: GenericService<Theater>,
     private router: Router
   ) {}
 
@@ -71,13 +77,22 @@ export class AdminComponent {
       this.genreList = data;
     });
     // Generic - Get All MovieGenre
-    this.movieGenreService
-      .getAll('MovieGenre')
-      .subscribe((data: MovieGenre[]) => {
+    this.movieGenreService.getAll('MovieGenre').subscribe((data: MovieGenre[]) => {
         this.movieGenreList = data;
       });
+    // Generic - Get All Address
+    this.addressService.getAll('Addresses').subscribe((data: Address[]) => {
+      this.addressList = data;
+    })
+    // Generic - Get All Theater
+    this.theaterService.getAll('Theaters').subscribe((data: Theater[]) => {
+      this.theaterList = data;
+    })
   }
-
+  getPostalName(postalCodeId: number): string {
+    const postal = this.postalCodeList.find((pc) => pc.postalCodeId === postalCodeId);
+    return postal ? postal.name : 'Unknown Postal Code';
+  }
   // Delete operations
 
   // Delete User
@@ -96,6 +111,24 @@ export class AdminComponent {
   deleteGenre(id: number) {
     this.genreService.deletebyid('Genres', id).subscribe(() => {
       alert(`Genre with ID: ${id}, is deleted successfully`);
+    });
+  }
+  // Delete Postal Code
+  deletePostalCode(id: number) {
+    this.postalService.deletebyid('PostalCodes', id).subscribe(() => {
+      alert(`Postal Code with ID: ${id}, is deleted successfully`);
+    });
+  }
+  // Delete Address
+  deleteAddress(id: number) {
+    this.addressService.deletebyid('Addresses', id).subscribe(() => {
+      alert(`Address with ID: ${id}, is deleted successfully`);
+    });
+  }
+  // Delete Theater
+  deleteTheater(id: number) {
+    this.theaterService.deletebyid('Theaters', id).subscribe(() => {
+      alert(`Theater with ID: ${id}, is deleted successfully`);
     });
   }
 }

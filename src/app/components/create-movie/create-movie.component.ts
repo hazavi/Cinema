@@ -29,7 +29,7 @@ export class CreateMovieComponent implements OnInit {
     this.movieForm = new FormGroup({
       posterUrl: new FormControl('', [
         Validators.required,
-        Validators.pattern('public/posters/.+'),
+        Validators.pattern('assets/posters/.+'),
       ]),
       title: new FormControl('', Validators.required),
       description: new FormControl('', Validators.required),

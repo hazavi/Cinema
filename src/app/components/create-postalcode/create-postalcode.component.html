@@ -1,0 +1,35 @@
+<div class="create-postalcode-container">
+    <h2>Create Postal Code</h2>
+    <form [formGroup]="postalCodeForm" (ngSubmit)="onSubmit()">
+        <!-- Postal Code ID -->
+        <div class="form-group">
+            <label for="postalCodeId">Postal Code:</label>
+            <input type="text" id="postalCodeId" class="form-control" formControlName="postalCodeId"
+                placeholder="(4 digits)" />
+            <div *ngIf="postalCodeForm.get('postalCodeId')?.invalid && postalCodeForm.get('postalCodeId')?.touched"
+                class="error-text">
+                Postal Code is required and must be exactly 4 digits.
+            </div>
+        </div>
+
+        <!-- Postal Code Name -->
+        <div class="form-group">
+            <label for="name">Name: </label>
+            <input type="text" id="name" class="form-control" formControlName="name"
+                placeholder="Enter Postal Code Name" />
+            <div *ngIf="postalCodeForm.get('name')?.invalid && postalCodeForm.get('name')?.touched" class="error-text">
+                Name is required and should not exceed 100 characters.
+            </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary" [disabled]="postalCodeForm.invalid">
+                Create Postal Code
+            </button>
+            <button type="back" class="btn btn-secondary" (click)="Back()">
+                Back
+            </button>
+        </div>
+    </form>
+</div>

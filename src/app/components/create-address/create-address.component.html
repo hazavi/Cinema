@@ -1,0 +1,48 @@
+<div class="create-address-container">
+    <h2>Create Address</h2>
+    <form [formGroup]="addressForm" (ngSubmit)="onSubmit()">
+        <!-- Street Number -->
+        <div class="form-group">
+            <label for="streetNumber">Street Number</label>
+            <input type="text" id="streetNumber" class="form-control" formControlName="streetNumber"
+                placeholder="Enter Street Number" />
+            <div *ngIf="addressForm.get('streetNumber')?.invalid && addressForm.get('streetNumber')?.touched"
+                class="error-text">
+                Street Number is required and must be a valid number.
+            </div>
+        </div>
+
+        <!-- Street Name -->
+        <div class="form-group">
+            <label for="streetName">Street Name</label>
+            <input type="text" id="streetName" class="form-control" formControlName="streetName"
+                placeholder="Enter Street Name" />
+            <div *ngIf="addressForm.get('streetName')?.invalid && addressForm.get('streetName')?.touched"
+                class="error-text">
+                Street Name is required and should not exceed 100 characters.
+            </div>
+        </div>
+
+        <!-- Postal Code Dropdown -->
+        <div class="form-group">
+            <label for="postalCodeId">Postal Code</label>
+            <select id="postalCodeId" class="form-control" formControlName="postalCodeId">
+                <option value="" disabled selected>Select Postal Code</option>
+                <option *ngFor="let postalCode of postalCodeList" [value]="postalCode.postalCodeId">
+                    {{ postalCode.postalCodeId }} ({{ postalCode.name }})
+                </option>
+            </select>
+            <div *ngIf="addressForm.get('postalCodeId')?.invalid && addressForm.get('postalCodeId')?.touched"
+                class="error-text">
+                Postal Code is required.
+            </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary" [disabled]="addressForm.invalid">
+                Create Address
+            </button>
+        </div>
+    </form>
+</div>

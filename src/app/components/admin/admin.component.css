@@ -100,7 +100,7 @@ td {
   padding: 5px;
   text-align: left;
   border: 1px solid #ccc;
-  font-size: 1rem; /* Slightly bigger text for readability */
+  font-size: 1rem;
 }
 
 th {
@@ -117,15 +117,15 @@ tr:hover {
   cursor: pointer; /* Improve UX for hovering */
 }
 
-.user-item,
-.movie-item,
-.genre-item {
+td:first-child {
+  font-weight: bold;
+}
+
+.model-item{
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.user-item:hover,
-.movie-item:hover,
-.genre-item:hover {
+.model-item:hover {
   background-color: #f9f9f9;
   transform: scale(1.02); /* Slight scaling effect for hover */
 }
@@ -147,17 +147,13 @@ button:hover {
   transform: scale(1.05);
 }
 
-.create-user-btn,
-.add-movie-btn,
-.create-genre-btn {
+.create-btn {
   background-color: #27ae60;
   color: white;
   font-weight: bold;
 }
 
-.create-user-btn:hover,
-.add-movie-btn:hover,
-.create-genre-btn:hover {
+.create-btn:hover {
   background-color: #2ecc71;
 }
 
@@ -172,9 +168,7 @@ h2 {
   font-size: 1.6rem;
 }
 
-button.create-user-btn,
-.add-movie-btn,
-.create-genre-btn {
+button.create-btn {
   margin-left: 20px;
 }
 

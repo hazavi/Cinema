@@ -1,0 +1,72 @@
+<div class="update-movie-container">
+    <form [formGroup]="movieForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="posterUrl">Poster URL:</label>
+            <input type="url" class="form-control" placeholder="Enter poster URL" formControlName="posterUrl"
+                required />
+            <div *ngIf="movieForm.get('posterUrl')?.invalid && movieForm.get('posterUrl')?.touched" class="error-text">
+                A valid poster URL is required.
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="title">Title:</label>
+            <input type="text" class="form-control" placeholder="Enter movie title" formControlName="title" required />
+            <div *ngIf="movieForm.get('title')?.invalid && movieForm.get('title')?.touched" class="error-text">
+                Title is required.
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea class="form-control" placeholder="Enter movie description" formControlName="description" rows="6"
+                required></textarea>
+            <div *ngIf="movieForm.get('description')?.invalid && movieForm.get('description')?.touched"
+                class="error-text">
+                Description is required.
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="durationMinutes">Duration: </label>
+            <input type="number" class="form-control" placeholder="(minutes)" formControlName="durationMinutes"
+                required />
+            <div *ngIf="movieForm.get('durationMinutes')?.invalid && movieForm.get('durationMinutes')?.touched"
+                class="error-text">
+                Duration must be a positive number.
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="rating">Rating:</label>
+            <input type="number" step="0.1" class="form-control" placeholder="(1-10)" formControlName="rating"
+                required />
+            <div *ngIf="movieForm.get('rating')?.invalid && movieForm.get('rating')?.touched" class="error-text">
+                Rating must be between 1 and 10.
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="releaseDate">Release Date:</label>
+            <input type="date" class="form-control" formControlName="releaseDate" required />
+            <div *ngIf="movieForm.get('releaseDate')?.invalid && movieForm.get('releaseDate')?.touched"
+                class="error-text">
+                Release date is required.
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="genreIds">Genres:</label>
+            <select formControlName="genreIds" multiple>
+                <option *ngFor="let genre of genres" [value]="genre.genreId">{{ genre.genreName }}</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="isShowing">Is Showing?</label>
+            <input type="checkbox" formControlName="isShowing" />
+        </div>
+
+        <button type="submit" class="btn btn-primary" [disabled]="!movieForm.valid">Update Movie</button>
+    </form>
+</div>

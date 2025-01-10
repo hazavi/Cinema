@@ -1,0 +1,50 @@
+<div class="create-theater-container">
+    <h2>Create Theater</h2>
+    <form [formGroup]="theaterForm" (ngSubmit)="onSubmit()">
+
+        <div class="form-group">
+            <label for="name">Theater Name</label>
+            <input id="name" formControlName="name" type="text" placeholder=" (FBio, KBio, LBio, RBio, ABio & HBio)" />
+            <div *ngIf="theaterForm.get('name')?.invalid && theaterForm.get('name')?.touched" class="error-text">
+                Name is required and must be under 100 characters.
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="capacity">Capacity</label>
+            <input id="capacity" formControlName="capacity" type="number" placeholder=" (80, 120, 130, 200)" />
+            <div *ngIf="theaterForm.get('capacity')?.invalid && theaterForm.get('capacity')?.touched"
+                class="error-text">
+                Capacity is required and must be greater than 0.
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="location">Location</label>
+            <input id="location" formControlName="location" type="text" placeholder="(Sal 1-10)" />
+            <div *ngIf="theaterForm.get('location')?.invalid && theaterForm.get('location')?.touched"
+                class="error-text">
+                Location is required.
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="addressId">Address</label>
+            <select id="addressId" formControlName="addressId">
+                <option value="" disabled>Select an address</option>
+                <option *ngFor="let address of addressList" [value]="address.addressId">{{ address.streetName }} 
+                    ({{ postalIdToName(address.postalCodeId) }})
+                </option>
+            </select>
+            <div *ngIf="theaterForm.get('addressId')?.invalid && theaterForm.get('addressId')?.touched"
+                class="error-text">
+                Address ID is required.
+            </div>
+        </div>
+
+        <button type="submit" [disabled]="theaterForm.invalid">Create Theater</button>
+        <div class="text-center">
+            <button type="button" (click)="back()">Back</button>
+        </div>
+    </form>
+</div>

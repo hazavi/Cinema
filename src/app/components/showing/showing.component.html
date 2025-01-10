@@ -1,1 +1,10 @@
-<p>showing works!</p>
+<div class="movies-container">
+    <div class="movie-card" *ngFor="let movie of movies">
+      <img [src]="movie.posterUrl" alt="{{ movie.title }}" class="movie-poster" />
+      <div class="movie-details">
+        <h3 class="movie-title">{{ movie.title }}</h3>
+        <p class="movie-genres">{{ movie.genreNames }}</p>
+      </div>
+    </div>
+  </div>
+  

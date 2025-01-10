@@ -10,6 +10,10 @@ import { ShowingComponent } from './components/showing/showing.component';
 import { CreateMovieComponent } from './components/create-movie/create-movie.component';
 import { CreateGenreComponent } from './components/create-genre/create-genre.component';
 import { ViewMovieComponent } from './components/view-movie/view-movie.component';
+import { UpdateMovieComponent } from './components/update-movie/update-movie.component';
+import { CreatePostalcodeComponent } from './components/create-postalcode/create-postalcode.component';
+import { CreateAddressComponent } from './components/create-address/create-address.component';
+import { CreateTheaterComponent } from './components/create-theater/create-theater.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' }, // home
@@ -20,10 +24,14 @@ export const routes: Routes = [
   { path: 'users', component: UserComponent }, // User list page
   { path: 'add-movie', component: CreateMovieComponent }, // Create movie form
   { path: 'view-movie/:id', component: ViewMovieComponent }, // view movie
+  { path: 'update-movie/:id', component: UpdateMovieComponent }, // update movie
   { path: 'create-user', component: CreateUserComponent }, // Create user form
   { path: 'create-genre', component: CreateGenreComponent }, // Create user form
   { path: 'view-user/:id', component: ViewUserComponent }, // view user
   { path: 'update-user/:id', component: UpdateUserComponent }, // update user
+  { path: 'create-postalcode', component: CreatePostalcodeComponent }, // create postalCode
+  { path: 'create-address', component: CreateAddressComponent }, // create address
+  { path: 'create-theater', component: CreateTheaterComponent }, // create theater
 ];
 
 // import { NgModule } from '@angular/core';
