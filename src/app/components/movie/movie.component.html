@@ -1,0 +1,57 @@
+<div class="movie-container" *ngIf="movie">
+    <div class="movie-details">
+        <img class="movie-poster" [src]="movie.posterUrl" alt="{{ movie.title }}" />
+        <div class="movie-info">
+            <h1>{{ movie.title }}</h1>
+            <p>{{ movie.description }}</p>
+            <br />
+            <p><strong>Release Date: </strong>{{ movie.releaseDate | date:'d MMMM yyyy' }}</p>
+            <p><strong>Duration: </strong>{{ durationToHoursMinutes(movie.durationMinutes) }}</p>
+            <p><strong>Rating: </strong> <span class="star-logo">⭐</span> {{ movie.rating }} stars</p>
+            <p><strong>Genres: </strong>{{ movieDetails?.genreNames || 'Loading genres...' }}</p>
+        </div>
+
+    </div>
+
+    <div class="city-selector">
+        <label for="city">Choose Cinema:</label>
+        <select [(ngModel)]="selectedCityId" (change)="loadShowtimes(movie.movieId, selectedCityId)">
+            <option value="0">All Cities</option>
+            <option *ngFor="let postalCode of postalCodes" [value]="postalCode.postalCodeId">
+                {{ postalCode.name }} ({{getTheaterNameByPostalCode(postalCode.postalCodeId)}})
+            </option>
+        </select>
+    </div>
+
+    <div class="showtime-calendar">
+        <h3>Showtimes</h3>
+        <ng-container *ngIf="showtimes.length > 0 || selectedCityId !== 0; else noShowtimes">
+            <div class="calendar-grid">
+                <div class="calendar-day" *ngFor="let day of days">
+                    <div class="calendar-header">
+                        <span class="day-name">{{ datePipe.transform(day.fullDate, 'EEE, d/M ') }}</span>
+
+                    </div>
+                    <div *ngIf="getShowtimesForDay(day.date).length > 0; else noShowtimesForDay">
+                        <div *ngFor="let showtime of getShowtimesForDay(day.date)" class="calendar-showtime"
+                            (click)="onShowtimeClick(showtime)">
+                            <p class="theater-name">{{ getTheaterName(showtime.theaterId) }}</p>
+                            <p class="time">{{ datePipe.transform(showtime.startTime, 'HH:mm') }}</p>
+                            <p class="location">{{ getLocation(showtime.theaterId) }}</p>
+                        </div>
+                    </div>
+                    <ng-template #noShowtimesForDay>
+                        <p class="no-showtimes">No showtimes available.</p>
+                    </ng-template>
+                </div>
+            </div>
+        </ng-container>
+        <ng-template #noShowtimes>
+            <p>No showtimes available for the selected city.</p>
+        </ng-template>
+    </div>
+</div>
+
+<div class="loading-message" *ngIf="!movie">
+    <p>Loading movie details...</p>
+</div>

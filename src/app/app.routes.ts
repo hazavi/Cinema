@@ -15,11 +15,13 @@ import { CreatePostalcodeComponent } from './components/create-postalcode/create
 import { CreateAddressComponent } from './components/create-address/create-address.component';
 import { CreateTheaterComponent } from './components/create-theater/create-theater.component';
 import { CreateShowtimeComponent } from './components/create-showtime/create-showtime.component';
+import { MovieComponent } from './components/movie/movie.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' }, // Default redirect to home
   { path: 'home', component: HomeComponent }, // Home Page
   { path: 'login', component: LoginComponent }, // Login Page
+  { path: 'movie/:id/:movieName', component: MovieComponent }, // Movie Page
 
   // Admin-related routes
   {

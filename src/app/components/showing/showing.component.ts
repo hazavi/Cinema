@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-showing',
+  standalone: true,
   imports: [CommonModule],
   templateUrl: './showing.component.html',
   styleUrls: ['./showing.component.css'],
@@ -25,18 +26,16 @@ export class ShowingComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.fetchMovies(); // Start by fetching movies
+    this.fetchMovies(); // Fetch movies on initialization
   }
 
-  // Fetches the list of movies that are currently showing
   private fetchMovies(): void {
     this.movieService.getAll('Movies').subscribe((movies) => {
-      this.movies = movies.filter((movie) => movie.isShowing);
-      this.fetchGenres(); // Fetch genres once movies are available
+      this.movies = movies.filter((movie) => movie.isShowing); // Filter currently showing movies
+      this.fetchGenres(); // Fetch genres after movies
     });
   }
 
-  // Fetches the list of all genres
   private fetchGenres(): void {
     this.genreService.getAll('Genres').subscribe((genres) => {
       this.genres = genres;
@@ -44,35 +43,31 @@ export class ShowingComponent implements OnInit {
     });
   }
 
-  // Fetches the list of movie-genre relationships
   private fetchMovieGenres(): void {
     this.movieGenreService.getAll('MovieGenre').subscribe((movieGenres) => {
       this.movieGenres = movieGenres;
-      this.assignGenreNames(); // Assign genre names after all data is available
+      this.assignGenreNames(); // Assign genre names to movies after data fetch
     });
   }
 
-  // Assigns genre names to each movie
   private assignGenreNames(): void {
     this.movies.forEach((movie) => {
-      // Get genre IDs associated with the current movie
       const relatedGenreIds = this.movieGenres
         .filter((mg) => mg.movieId === movie.movieId)
         .map((mg) => mg.genreId);
 
-      // Map genre IDs to genre names
       const relatedGenreNames = this.genres
         .filter((genre) => relatedGenreIds.includes(genre.genreId))
         .map((genre) => genre.genreName)
         .join(', ');
 
-      // Assign genre names or a fallback message
       movie.genreNames = relatedGenreNames || 'No genres available';
     });
   }
-  viewMovie(movieId: number): void {
-    // Navigate to the view-movie component with the movieId as a parameter
-    this.router.navigate(['/view-movie', movieId]);
-  } 
-  // Add query paramters to the URL => /view-movie/:movieId?city={cityName}
+
+  viewMovie(movieId: number, movieName: string): void {
+    const formattedName = movieName.replace(/\s+/g, '-').toLowerCase(); // Format name for URL
+    this.router.navigate(['/movie', movieId, formattedName]); // Navigate with both id and movieName
+  }
+  
 }

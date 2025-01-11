@@ -21,7 +21,7 @@
 
         <div class="form-group">
             <label for="location">Location</label>
-            <input id="location" formControlName="location" type="text" placeholder="(Sal 1-10)" />
+            <input id="location" formControlName="location" type="text" placeholder="(Bio 1-10)" />
             <div *ngIf="theaterForm.get('location')?.invalid && theaterForm.get('location')?.touched"
                 class="error-text">
                 Location is required.

@@ -6,7 +6,7 @@
             <select id="theater" formControlName="theaterId">
                 <option value="" disabled selected>Select a theater</option>
                 <option *ngFor="let theater of theaters" [value]="theater.theaterId">
-                    {{ theater.name }} - {{ theater.location }}
+                    {{ theater.name }} - {{ theater.location }} ({{ theater.capacity }} seats)
                 </option>
             </select>
         </div>

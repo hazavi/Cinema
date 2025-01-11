@@ -1,0 +1,177 @@
+.movie-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 30px;
+  font-family: Arial, sans-serif;
+  /* background-color: #ffffff; */
+  border-radius: 12px;
+  overflow: hidden; /* Ensure content stays within bounds */
+}
+
+.movie-details {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.movie-poster {
+  width: 250px;
+  height: 375px;
+  border-radius: 5px;
+  object-fit: cover;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+}
+
+.movie-info h1 {
+  font-size: 28px;
+  margin: 0 0 12px;
+  color: #fff;
+}
+
+.movie-info p {
+  color: #fff;
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+.city-selector {
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.city-selector label {
+  font-weight: 600;
+  font-size: 1.2em;
+  color: #fff;
+}
+
+.city-selector select {
+  padding: 10px 20px; /* Adjusted padding for a more spacious feel */
+  border: 2px solid #4caf50; /* Green border for better visibility */
+  border-radius: 10px; /* Rounded corners */
+  background-color: #fff;
+  font-size: 1em; /* Larger font size for readability */
+  color: #333; /* Dark text color for better contrast */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  transition: all 0.3s ease; /* Smooth transition on hover */
+}
+
+.city-selector select:hover {
+  border-color: #45a049; /* Change border color on hover */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+}
+
+.city-selector select:focus {
+  outline: none;
+  border-color: #4caf50; /* Keep the green border on focus */
+  box-shadow: 0 0 8px rgba(76, 175, 80, 0.3); /* Focus shadow effect */
+}
+
+.showtime-calendar {
+  margin-top: 30px;
+
+  overflow-x: auto; /* Allow horizontal scroll for the calendar if needed */
+}
+
+.showtime-calendar h3 {
+  font-size: 22px;
+  margin-bottom: 20px;
+  color: #fff;
+  font-weight: 600;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    7,
+    1fr
+  ); /* 7 columns for each day of the week */
+  margin-bottom: 30px;
+}
+
+.calendar-day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  border-radius: 12px;
+  min-width: 80px; /* Prevent overflow by keeping a minimum width */
+  max-width: 100px; /* Maximum width to maintain control over layout */
+  position: relative;
+}
+
+/* Add line between days */
+.calendar-day:not(:last-child) {
+  border-right: 2px solid #ccc;
+}
+
+.calendar-header {
+  text-align: center;
+  margin-bottom: 12px;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 8px;
+}
+
+.day-name {
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.date {
+  font-size: 16px;
+  color: #fff;
+}
+
+.calendar-showtime {
+  margin-top: 12px;
+  text-align: center;
+  padding: 5px 20px; 
+  background-color: #4caf50; 
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
+  min-width: 20px; 
+}
+
+.calendar-showtime:hover {
+  background-color: #45a049;
+  cursor: pointer;
+}
+
+.time {
+  font-size: 1.4em; 
+  font-weight: 600;
+  margin-bottom: 8px; 
+  margin-top: 5px;
+}
+
+.location {
+  font-size: 1em; 
+  color: #f0f0f0;
+  margin-top: 5px; 
+}
+
+.theater-name {
+  font-size: 1em; 
+  font-weight: bold;
+  color: #fff;
+  margin-top: 5px;
+}
+
+.no-showtimes {
+  font-size: 14px;
+  color: #fff;
+  text-align: center;
+}
+
+.loading-message {
+  text-align: center;
+  padding: 20px;
+}
+
+.loading-message p {
+  color: #fff;
+  font-size: 16px;
+}

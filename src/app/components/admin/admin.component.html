@@ -273,7 +273,7 @@
                         <td>{{ s.showtimeId }}</td>
                         <td>{{ s.theaterId }}</td>
                         <td>{{ s.movieId }}</td>
-                        <td>{{ s.startTime | date:'EEEE, d/M HH:mm' }}</td>
+                        <td>{{ s.startTime | date:'EEEE, d/M -- HH:mm' }}</td>
                         <td>
                             <button class="btn btn-view"
                                 [routerLink]="['/admin/view-showtime', s.showtimeId]">View</button>
