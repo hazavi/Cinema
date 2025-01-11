@@ -12,7 +12,8 @@
 }
 
 .movie-card:hover {
-  box-shadow: 0 6px 12px rgba(107, 106, 106, 0.15);
+  box-shadow: 0 6px 12px rgba(62, 61, 61, 0.15);
+  cursor: pointer;
 }
 
 .movie-poster {

@@ -4,6 +4,7 @@ import { Movie } from '../../models/movie';
 import { MovieGenre } from '../../models/moviegenre';
 import { Genre } from '../../models/genre';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-showing',
@@ -19,7 +20,8 @@ export class ShowingComponent implements OnInit {
   constructor(
     private movieService: GenericService<Movie>,
     private genreService: GenericService<Genre>,
-    private movieGenreService: GenericService<MovieGenre>
+    private movieGenreService: GenericService<MovieGenre>,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -68,4 +70,9 @@ export class ShowingComponent implements OnInit {
       movie.genreNames = relatedGenreNames || 'No genres available';
     });
   }
+  viewMovie(movieId: number): void {
+    // Navigate to the view-movie component with the movieId as a parameter
+    this.router.navigate(['/view-movie', movieId]);
+  } 
+  // Add query paramters to the URL => /view-movie/:movieId?city={cityName}
 }

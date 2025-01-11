@@ -24,6 +24,9 @@
             <li>
                 <div (click)="showContent('postalCodes')">Postal Codes</div>
             </li>
+            <li>
+                <div (click)="showContent('showtimes')">Showtime</div>
+            </li>
             <li><a href="#">Logout</a></li>
         </ul>
     </div>
@@ -50,10 +53,10 @@
         </div>
 
         <!-- User Content -->
-        <div *ngIf="activeContent === 'users'" class="user-content">
+        <div *ngIf="activeContent === 'users'" class="model-content">
             <div class="header">
                 <h2>All Users</h2>
-                <button class="create-btn" routerLink="/create-user">+ Create User</button>
+                <button class="create-btn" routerLink="/users/create">+ Create User</button>
             </div>
             <!-- User Table -->
             <table class="user-table">
@@ -75,8 +78,8 @@
                         <td>{{ user.postalCodeId }}</td>
                         <td>{{ user.isAdmin }}</td>
                         <td>
-                            <button class="btn btn-view" [routerLink]="['/view-user', user.userId]">View</button>
-                            <button class="btn btn-update" [routerLink]="['/update-user', user.userId]">Update</button>
+                            <button class="btn btn-view" [routerLink]="['/users/view', user.userId]">View</button>
+                            <button class="btn btn-update" [routerLink]="['/users/update', user.userId]">Update</button>
                             <button class="btn btn-delete" (click)="deleteUser(user.userId)">Delete</button>
                         </td>
                     </tr>
@@ -85,9 +88,9 @@
         </div>
 
         <!-- Movie Content -->
-        <div *ngIf="activeContent === 'movies'" class="movie-content">
+        <div *ngIf="activeContent === 'movies'" class="model-content">
             <h2>Movies</h2>
-            <button class="create-btn add-movie-btn" routerLink="/add-movie">+ Add Movie</button>
+            <button class="create-btn add-movie-btn" routerLink="/admin/add-movie">+ Add Movie</button>
             <!-- Movie Table -->
             <table class="movie-table">
                 <thead>
@@ -108,9 +111,10 @@
                         <td>{{ movie.rating }}</td>
                         <td>{{ movie.isShowing }}</td>
                         <td>
-                            <button class="btn btn-view" [routerLink]="['/view-movie', movie.movieId]">View</button>
+                            <button class="btn btn-view"
+                                [routerLink]="['/admin/view-movie', movie.movieId]">View</button>
                             <button class="btn btn-update"
-                                [routerLink]="['/update-movie', movie.movieId]">Update</button>
+                                [routerLink]="['/admin/update-movie', movie.movieId]">Update</button>
                             <button class="btn btn-delete" (click)="deleteMovie(movie.movieId)">Delete</button>
                         </td>
                     </tr>
@@ -119,9 +123,9 @@
         </div>
 
         <!-- Genres Content -->
-        <div *ngIf="activeContent === 'genres'" class="genres-content">
+        <div *ngIf="activeContent === 'genres'" class="model-content">
             <h2>Genres</h2>
-            <button class="create-btn" routerLink="/create-genre">+ Add Genre</button>
+            <button class="create-btn" routerLink="/admin/create-genre">+ Add Genre</button>
             <!-- Genre Table -->
             <table class="genre-table">
                 <thead>
@@ -137,9 +141,10 @@
                         <td>{{ genre.genreName }}</td>
                         <!-- <td>{{ genre.movieGenres }}</td> -->
                         <td>
-                            <button class="btn btn-view" [routerLink]="['/view-genre', genre.genreId]">View</button>
+                            <button class="btn btn-view"
+                                [routerLink]="['/admin/view-genre', genre.genreId]">View</button>
                             <button class="btn btn-update"
-                                [routerLink]="['/update-genre', genre.genreId]">Update</button>
+                                [routerLink]="['/admin/update-genre', genre.genreId]">Update</button>
                             <button class="btn btn-delete" (click)="deleteGenre(genre.genreId)">Delete</button>
                         </td>
                     </tr>
@@ -149,9 +154,9 @@
 
 
         <!-- Theater Content -->
-        <div *ngIf="activeContent === 'theaters'" class="theater-content">
+        <div *ngIf="activeContent === 'theaters'" class="model-content">
             <h2>Theaters</h2>
-            <button class="create-btn" routerLink="/create-theater">+ Add Theater</button>
+            <button class="create-btn" routerLink="/admin/create-theater">+ Add Theater</button>
             <!-- Theater Table -->
             <table class="theater-table">
                 <thead>
@@ -172,9 +177,10 @@
                         <td>{{ t.location }}</td>
                         <td>{{ t.addressId }}</td>
                         <td>
-                            <button class="btn btn-view" [routerLink]="['/view-theater', t.theaterId]">View</button>
+                            <button class="btn btn-view"
+                                [routerLink]="['/admin/view-theater', t.theaterId]">View</button>
                             <button class="btn btn-update"
-                                [routerLink]="['/update-theater', t.theaterId]">Update</button>
+                                [routerLink]="['/admin/update-theater', t.theaterId]">Update</button>
                             <button class="btn btn-delete" (click)="deleteTheater(t.theaterId)">Delete</button>
                         </td>
                     </tr>
@@ -184,9 +190,9 @@
 
 
         <!-- Address Content -->
-        <div *ngIf="activeContent === 'addresses'" class="address-content">
+        <div *ngIf="activeContent === 'addresses'" class="model-content">
             <h2>Addresses</h2>
-            <button class="create-btn" routerLink="/create-address">+ Add Address</button>
+            <button class="create-btn" routerLink="/admin/create-address">+ Add Address</button>
             <!-- Address Table -->
             <table class="address-table">
                 <thead>
@@ -207,20 +213,22 @@
                         <td>{{ a.postalCodeId }}</td>
                         <td>{{ getPostalName(a.postalCodeId) }}</td>
                         <td>
-                            <button class="btn btn-view" [routerLink]="['/view-address', a.addressId]">View</button>
+                            <button class="btn btn-view"
+                                [routerLink]="['/admin/view-address', a.addressId]">View</button>
                             <button class="btn btn-update"
-                                [routerLink]="['/update-address', a.addressId]">Update</button>
+                                [routerLink]="['/admin/update-address', a.addressId]">Update</button>
                             <button class="btn btn-delete" (click)="deleteAddress(a.addressId)">Delete</button>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
+
         <!-- Postal Code Content -->
-        <div *ngIf="activeContent === 'postalCodes'" class="address-content">
+        <div *ngIf="activeContent === 'postalCodes'" class="model-content">
             <h2>Postal Codes</h2>
-            <button class="create-btn" routerLink="/create-postalcode">+ Add Postal-Code</button>
-            <!-- Theater Table -->
+            <button class="create-btn" routerLink="/admin/create-postalcode">+ Add Postal-Code</button>
+            <!-- Postal Code Table -->
             <table class="PostalCode-table">
                 <thead>
                     <tr>
@@ -235,13 +243,49 @@
                         <td>{{ p.name }}</td>
                         <td>
                             <button class="btn btn-view"
-                                [routerLink]="['/view-postalcode', p.postalCodeId]">View</button>
-                            <button class="btn btn-update" [routerLink]="['/update-postalcode', p.name]">Update</button>
+                                [routerLink]="['/admin/view-postalcode', p.postalCodeId]">View</button>
+                            <button class="btn btn-update"
+                                [routerLink]="['/admin/update-postalcode', p.postalCodeId]">Update</button>
                             <button class="btn btn-delete" (click)="deletePostalCode(p.postalCodeId)">Delete</button>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
+
+        <!-- Showtime Content -->
+        <div *ngIf="activeContent === 'showtimes'" class="model-content">
+            <h2>Showtimes</h2>
+            <button class="create-btn" routerLink="/admin/create-showtime">+ Add Showtime</button>
+            <!-- Showtime Table -->
+            <table class="Showtime-table">
+                <thead>
+                    <tr>
+                        <th>Showtime Id</th>
+                        <th>Theater Id</th>
+                        <th>Movie Id</th>
+                        <th>Start Time</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let s of showtimeList" class="model-item">
+                        <td>{{ s.showtimeId }}</td>
+                        <td>{{ s.theaterId }}</td>
+                        <td>{{ s.movieId }}</td>
+                        <td>{{ s.startTime | date:'EEEE, d/M HH:mm' }}</td>
+                        <td>
+                            <button class="btn btn-view"
+                                [routerLink]="['/admin/view-showtime', s.showtimeId]">View</button>
+                            <button class="btn btn-update"
+                                [routerLink]="['/admin/update-showtime', s.showtimeId]">Update</button>
+                            <button class="btn btn-delete" (click)="deleteShowtime(s.showtimeId)">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
     </div>
 </div>

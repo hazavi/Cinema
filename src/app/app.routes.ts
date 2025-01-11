@@ -14,40 +14,40 @@ import { UpdateMovieComponent } from './components/update-movie/update-movie.com
 import { CreatePostalcodeComponent } from './components/create-postalcode/create-postalcode.component';
 import { CreateAddressComponent } from './components/create-address/create-address.component';
 import { CreateTheaterComponent } from './components/create-theater/create-theater.component';
+import { CreateShowtimeComponent } from './components/create-showtime/create-showtime.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' }, // home
-  { path: 'login', component: LoginComponent }, // Login Page
-  { path: 'admin', component: AdminComponent }, // Admin Page
+  { path: '', redirectTo: '/home', pathMatch: 'full' }, // Default redirect to home
   { path: 'home', component: HomeComponent }, // Home Page
-  { path: 'showing', component: ShowingComponent }, // Showing Page
-  { path: 'users', component: UserComponent }, // User list page
-  { path: 'add-movie', component: CreateMovieComponent }, // Create movie form
-  { path: 'view-movie/:id', component: ViewMovieComponent }, // view movie
-  { path: 'update-movie/:id', component: UpdateMovieComponent }, // update movie
-  { path: 'create-user', component: CreateUserComponent }, // Create user form
-  { path: 'create-genre', component: CreateGenreComponent }, // Create user form
-  { path: 'view-user/:id', component: ViewUserComponent }, // view user
-  { path: 'update-user/:id', component: UpdateUserComponent }, // update user
-  { path: 'create-postalcode', component: CreatePostalcodeComponent }, // create postalCode
-  { path: 'create-address', component: CreateAddressComponent }, // create address
-  { path: 'create-theater', component: CreateTheaterComponent }, // create theater
+  { path: 'login', component: LoginComponent }, // Login Page
+
+  // Admin-related routes
+  {
+    path: 'admin',
+    children: [
+      { path: '', component: AdminComponent },
+      { path: 'add-movie', component: CreateMovieComponent }, // Create movie form
+      { path: 'view-movie/:id', component: ViewMovieComponent }, // View movie details
+      { path: 'update-movie/:id', component: UpdateMovieComponent }, // Update movie
+      { path: 'create-genre', component: CreateGenreComponent }, // Create genre
+      { path: 'create-postalcode', component: CreatePostalcodeComponent }, // Create postal code
+      { path: 'create-address', component: CreateAddressComponent }, // Create address
+      { path: 'create-theater', component: CreateTheaterComponent }, // Create theater
+      { path: 'create-showtime', component: CreateShowtimeComponent }, // Create Showtime
+    ],
+  },
+
+  // User-related routes
+  {
+    path: 'users',
+    children: [
+      { path: '', component: UserComponent }, // User list
+      { path: 'create', component: CreateUserComponent }, // Create user
+      { path: 'view/:id', component: ViewUserComponent }, // View user
+      { path: 'update/:id', component: UpdateUserComponent }, // Update user
+    ],
+  },
+
+  // Showing-related routes
+  { path: 'showing', component: ShowingComponent }, // Showing page
 ];
-
-// import { NgModule } from '@angular/core';
-// import { RouterModule, Routes } from '@angular/router';
-// import { CreateUserComponent } from './components/user/create-user/create-user.component'; // Ensure the path is correct
-// import { UserComponent } from './components/user/user.component'; // Ensure the path is correct
-
-// // Define your app routes
-// const routes: Routes = [
-//   { path: '', redirectTo: '/users', pathMatch: 'full' }, // Redirect to users list by default
-//   { path: 'users', component: UserComponent }, // User list page
-//   { path: 'create-user', component: CreateUserComponent }, // Create user form
-// ];
-
-// @NgModule({
-//   imports: [RouterModule.forRoot(routes)], // Import and configure the routes
-//   exports: [RouterModule], // Export RouterModule so it can be used in other parts of the app
-// })
-// export class AppRoutingModule {}

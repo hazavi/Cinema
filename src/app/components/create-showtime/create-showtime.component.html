@@ -1,0 +1,33 @@
+<div class="create-showtime-container">
+    <h2>Create Showtime</h2>
+    <form [formGroup]="showtimeForm" (ngSubmit)="createShowtime()">
+        <div class="form-group">
+            <label for="theater">Theater</label>
+            <select id="theater" formControlName="theaterId">
+                <option value="" disabled selected>Select a theater</option>
+                <option *ngFor="let theater of theaters" [value]="theater.theaterId">
+                    {{ theater.name }} - {{ theater.location }}
+                </option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="movie">Movie</label>
+            <select id="movie" formControlName="movieId">
+                <option value="" disabled selected>Select a movie</option>
+                <option *ngFor="let movie of movies" [value]="movie.movieId">
+                    {{ movie.title }}
+                </option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="startTime">Start Time</label>
+            <input type="datetime-local" id="startTime" formControlName="startTime" />
+        </div>
+
+        <div class="text-center">
+            <button type="submit" [disabled]="isSubmitting">Create Showtime</button>
+        </div>
+    </form>
+</div>

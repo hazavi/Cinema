@@ -12,7 +12,7 @@
 
         <div class="form-group">
             <label for="capacity">Capacity</label>
-            <input id="capacity" formControlName="capacity" type="number" placeholder=" (80, 120, 130, 200)" />
+            <input id="capacity" formControlName="capacity" type="number" placeholder=" (40, 80, 120, 130, 200)" />
             <div *ngIf="theaterForm.get('capacity')?.invalid && theaterForm.get('capacity')?.touched"
                 class="error-text">
                 Capacity is required and must be greater than 0.

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { User } from '../../models/user';
 import { Router } from '@angular/router';
@@ -10,12 +10,14 @@ import { Genre } from '../../models/genre';
 import { MovieGenre } from '../../models/moviegenre';
 import { Address } from '../../models/address';
 import { Theater } from '../../models/theater';
+import { Showtime } from '../../models/showtime';
 
 @Component({
   selector: 'app-admin',
   imports: [CommonModule, CommonModule, RouterModule],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css',
+  providers: [DatePipe], 
 })
 export class AdminComponent {
   userList: User[] = [];
@@ -25,6 +27,7 @@ export class AdminComponent {
   movieGenreList: MovieGenre[] = [];
   addressList: Address[] = [];
   theaterList: Theater[] = [];
+  showtimeList: Showtime[] = [];
   activeContent: string = 'dashboard'; // Default content to display
 
   constructor(
@@ -35,7 +38,9 @@ export class AdminComponent {
     private movieGenreService: GenericService<MovieGenre>,
     private addressService: GenericService<Address>,
     private theaterService: GenericService<Theater>,
-    private router: Router
+    private showtimeService: GenericService<Showtime>,
+    private router: Router,
+    private datePipe: DatePipe
   ) {}
 
   currentPage = 1;
@@ -77,20 +82,28 @@ export class AdminComponent {
       this.genreList = data;
     });
     // Generic - Get All MovieGenre
-    this.movieGenreService.getAll('MovieGenre').subscribe((data: MovieGenre[]) => {
+    this.movieGenreService
+      .getAll('MovieGenre')
+      .subscribe((data: MovieGenre[]) => {
         this.movieGenreList = data;
       });
     // Generic - Get All Address
     this.addressService.getAll('Addresses').subscribe((data: Address[]) => {
       this.addressList = data;
-    })
+    });
     // Generic - Get All Theater
     this.theaterService.getAll('Theaters').subscribe((data: Theater[]) => {
       this.theaterList = data;
-    })
+    });
+    // Generic - Get All Showtime
+    this.showtimeService.getAll('Showtimes').subscribe((data: Showtime[]) => {
+      this.showtimeList = data;
+    });
   }
   getPostalName(postalCodeId: number): string {
-    const postal = this.postalCodeList.find((pc) => pc.postalCodeId === postalCodeId);
+    const postal = this.postalCodeList.find(
+      (pc) => pc.postalCodeId === postalCodeId
+    );
     return postal ? postal.name : 'Unknown Postal Code';
   }
   // Delete operations
@@ -129,6 +142,12 @@ export class AdminComponent {
   deleteTheater(id: number) {
     this.theaterService.deletebyid('Theaters', id).subscribe(() => {
       alert(`Theater with ID: ${id}, is deleted successfully`);
+    });
+  }
+  // Delete Showtime
+  deleteShowtime(id: number) {
+    this.showtimeService.deletebyid('Showtimes', id).subscribe(() => {
+      alert(`Showtime with ID: ${id}, is deleted successfully`);
     });
   }
 }

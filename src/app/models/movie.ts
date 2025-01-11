@@ -12,7 +12,7 @@ export class Movie {
   genreIds: number[] = [];
   genreNames?: string;
   isShowing: boolean = false;
+}
   // movieGenres: MovieGenre[] = [];
   // Director
   // Distributed by
-}
