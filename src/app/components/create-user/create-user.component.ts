@@ -11,15 +11,9 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-create-user',
   standalone: true,
-  imports: [
-    CommonModule,
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    RouterModule,
-  ],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule],
   templateUrl: './create-user.component.html',
-  styleUrl: './create-user.component.css',
+  styleUrls: ['./create-user.component.css'],
 })
 export class CreateUserComponent {
   postalCodeList: PostalCode[] = [];
@@ -33,21 +27,15 @@ export class CreateUserComponent {
     private fb: FormBuilder
   ) {}
 
-  // HTML Forms - Reactive Forms
-  // userForm: FormGroup = new FormGroup({
-  //   userId: new FormControl(),
-  //   firstName: new FormControl(), // validators
-  //   lastName: new FormControl(),
-  //   email: new FormControl(),
-  //   postalCodeId: new FormControl(),
-  // });
-
   onSubmit(): void {
     if (this.userForm.valid) {
-      const newUser = this.userForm.value;
-      newUser.isAdmin = false;
+      const newUser = this.userForm.value; // Get form values
+      console.log('Form value:', newUser);
+      // newUser.isAdmin will correctly reflect the checkbox state
       newUser.passwordHash = ''; // Initially, password hash will be empty
       newUser.passwordSalt = '';
+      console.log('isAdmin:', this.userForm.get('isAdmin')?.value);
+
       this.userService.create('Users', newUser).subscribe(
         (response) => {
           console.log('User Created Successfully', response);
@@ -61,9 +49,11 @@ export class CreateUserComponent {
       );
     }
   }
+
   goBack(): void {
-    this.router.navigate(['/home']);
+    this.router.navigate(['/admin']);
   }
+
   ngOnInit(): void {
     this.userForm = this.fb.group({
       firstName: ['', Validators.required],
@@ -72,18 +62,20 @@ export class CreateUserComponent {
       postalCodeId: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]], // Password field with validation
       confirmPassword: ['', [Validators.required, this.passwordMatchValidator]], // Confirm password field
+      isAdmin: [false], // New field to specify admin role
     });
 
-    // Generic - Get All User
+    // Get all users (optional)
     this.userService.getAll('Users').subscribe((data: User[]) => {
       this.userList = data;
     });
 
-    // Generic - Get All PostalCode
+    // Get all postal codes
     this.postalService.getAll('PostalCodes').subscribe((data: PostalCode[]) => {
       this.postalCodeList = data;
     });
   }
+
   // Custom validator to check if the password and confirm password match
   passwordMatchValidator(
     control: FormControl

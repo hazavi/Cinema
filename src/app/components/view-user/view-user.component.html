@@ -8,6 +8,7 @@
     <p><strong>Name:</strong> {{ userDetails.firstName }} {{ userDetails.lastName }}</p>
     <p><strong>Email:</strong> {{ userDetails.email }}</p>
     <p><strong>Postal Code:</strong> {{ userDetails.postalCodeId }}</p>
+    <p><strong>isAdmin?</strong> {{ userDetails.isAdmin }}</p>
 </div>
 
 <div *ngIf="!isLoading && errorMessage" class="error-message">

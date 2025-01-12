@@ -1,0 +1,42 @@
+<div class="register-container">
+    <h2>Register</h2>
+    <form (ngSubmit)="register()">
+        <div>
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" [(ngModel)]="registerModel.firstName" name="firstName" required />
+        </div>
+
+        <div>
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" [(ngModel)]="registerModel.lastName" name="lastName" required />
+        </div>
+
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" [(ngModel)]="registerModel.email" name="email" required />
+        </div>
+
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" [(ngModel)]="registerModel.password" name="password" required />
+        </div>
+
+        <div>
+            <label for="postalCodeId">Postal Code:</label>
+            <select id="postalCodeId" [(ngModel)]="registerModel.postalCodeId" name="postalCodeId" required>
+                <option value="" disabled>Select Postal Code</option>
+                <option *ngFor="let postalCode of postalCodes" [value]="postalCode.postalCodeId">
+                    {{ postalCode.name }}
+                </option>
+            </select>
+        </div>
+
+        <button type="submit">Register</button>
+
+        <p>Already have an account? <a routerLink="/login">Login</a></p>
+
+        <div *ngIf="errorMessage" class="error-message">
+            <p>{{ errorMessage }}</p>
+        </div>
+    </form>
+</div>

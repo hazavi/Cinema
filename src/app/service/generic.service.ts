@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Address } from '../models/address';
+import { RegisterModel } from '../models/registermodel';
+import { LoginRequest } from '../models/loginrequest';
+import { LoginResponse } from '../models/loginresponse';
 
 const httpOptions = {
   heades: new HttpHeaders({
@@ -34,10 +37,6 @@ export class GenericService<Model> {
   create2<T>(endPoint: string, model: T): Observable<T> {
     return this.http.post<T>(`${this.url}/${endPoint}`, model); // POST
   }
-  // Generic method to handle image upload
-  uploadImage(formData: FormData): Observable<any> {
-    return this.http.post<any>(`${this.url}/movies/upload-image`, formData); // POST
-  }
   // Update Model by ID
   updatebyid(endPoint: string, id: number, model: Model): Observable<Model> {
     return this.http.put<Model>(`${this.url}/${endPoint}/${id}`, model); // PUT
@@ -47,4 +46,14 @@ export class GenericService<Model> {
   deletebyid(endPoint: string, id: number): Observable<void> {
     return this.http.delete<void>(`${this.url}/${endPoint}/${id}`); // DELETE
   }
+  // Register Method
+  register(register: RegisterModel): Observable<any> {
+    return this.http.post(`${this.url}/Users/register`, register);
+  }
+
+  // Login Method
+  login(login: LoginRequest): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(`${this.url}/Users/login`, login);
+  }
+  
 }

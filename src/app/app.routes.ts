@@ -16,11 +16,13 @@ import { CreateAddressComponent } from './components/create-address/create-addre
 import { CreateTheaterComponent } from './components/create-theater/create-theater.component';
 import { CreateShowtimeComponent } from './components/create-showtime/create-showtime.component';
 import { MovieComponent } from './components/movie/movie.component';
+import { RegisterComponent } from './components/register/register.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' }, // Default redirect to home
   { path: 'home', component: HomeComponent }, // Home Page
   { path: 'login', component: LoginComponent }, // Login Page
+  { path: 'register', component: RegisterComponent }, // Register Page
   { path: 'movie/:id/:movieName', component: MovieComponent }, // Movie Page
 
   // Admin-related routes

@@ -1,5 +1,5 @@
 /* Form container */
-.form-container {
+.register-container {
   max-width: 600px;
   margin: 2rem auto;
   padding: 2rem;
@@ -19,7 +19,7 @@ h2 {
 }
 
 /* Form group */
-.form-group {
+div {
   margin-bottom: 15px;
 }
 
@@ -31,10 +31,8 @@ label {
   margin-bottom: 5px;
 }
 
-/* Inputs, selects, and textarea */
-input,
-select,
-textarea {
+/* Inputs */
+input {
   width: 100%;
   padding: 10px;
   border-radius: 5px;
@@ -45,32 +43,49 @@ textarea {
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-/* Focus state for inputs, selects, and textarea */
-input:focus,
-textarea:focus,
+/* Focus state for inputs */
+input:focus {
+  border-color: #0056b3;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 86, 179, 0.2);
+}
+/* Style for the postal code select dropdown */
+select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  box-sizing: border-box;
+  background-color: #fff;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* Focus state for select */
 select:focus {
   border-color: #0056b3;
   outline: none;
   box-shadow: 0 0 0 2px rgba(0, 86, 179, 0.2);
 }
 
-/* Placeholder styling */
-input::placeholder,
-select::placeholder,
-textarea::placeholder {
-  color: #a0aec0;
+/* Label styling for the select element */
+label[for="postalCodeId"] {
+  font-weight: bold;
+  color: #333;
+  display: block;
+  margin-bottom: 5px;
 }
 
-/* Select dropdown arrow */
-select {
-  appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%236B7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 0.75rem center;
-  background-size: 1rem;
-  padding-right: 2.5rem;
+/* Error message for select (if any) */
+select.ng-invalid.ng-touched {
+  border-color: #ff2a2a;
+  box-shadow: 0 0 5px rgba(255, 42, 42, 0.3);
 }
 
+/* Dropdown arrow style */
+select::-ms-expand {
+  display: none;
+}
 /* Buttons */
 button {
   width: 100%;
@@ -84,7 +99,6 @@ button {
   transition: background-color 0.3s, transform 0.1s ease-in-out;
   margin-top: 15px;
 }
-
 /* Button hover effect */
 button:hover {
   background-color: #0056b3;
@@ -95,14 +109,8 @@ button:active {
   transform: translateY(1px);
 }
 
-/* Disabled button state */
-button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
 /* Error message styling */
-.error-text {
+.error-message {
   color: #ff2a2a;
   font-size: 0.875rem;
   margin-top: 5px;
@@ -111,25 +119,31 @@ button:disabled {
   background-color: #fff3f3;
 }
 
-/* Checkbox styling */
-input[type="checkbox"] {
-  width: auto;
-  margin-right: 10px;
-  vertical-align: middle;
+/* Style for 'Already have an account?' text */
+.register-container p {
+  text-align: center;
+  font-size: 1rem;
+  margin-top: 15px;
+  color: #333;
 }
 
-.form-group.checkbox-group {
-  display: flex;
-  align-items: center;
+/* Style for the login link */
+.register-container p a {
+  color: #007bff;
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.3s;
 }
 
-.checkbox-group label {
-  margin-bottom: 0;
+/* Login link hover effect */
+.register-container p a:hover {
+  color: #0056b3;
+  cursor: pointer;
 }
 
 /* Mobile responsiveness */
 @media (max-width: 640px) {
-  .form-container {
+  .register-container {
     margin: 1rem;
     padding: 1.5rem;
   }

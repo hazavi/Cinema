@@ -42,7 +42,9 @@
         Passwords must match.
     </div>
 
-    <button type="submit" class="submit-btn" [disabled]="userForm.invalid">Create User</button>
+    <label for="isAdmin">Is Admin?</label>
+    <input type="checkbox" formControlName="isAdmin" />   
 
+    <button type="submit" class="submit-btn" [disabled]="userForm.invalid">Create User</button>
     <button type="button" (click)="goBack()" class="back-btn">Back</button>
 </form>
