@@ -2,7 +2,7 @@
     <form [formGroup]="movieForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
             <label for="posterUrl">Poster URL:</label>
-            <input type="url" class="form-control" placeholder="Enter poster URL" formControlName="posterUrl"
+            <input type="url" class="form-control" placeholder="assets/posters/..." formControlName="posterUrl"
                 required />
             <div *ngIf="movieForm.get('posterUrl')?.invalid && movieForm.get('posterUrl')?.touched" class="error-text">
                 A valid poster URL is required.
