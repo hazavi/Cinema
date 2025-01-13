@@ -21,24 +21,20 @@ export class AppComponent {
   userFirstName: string | null = null;
   user: User | null = null;
   isUserAdmin: boolean = false;
-
+  userId: number | null = null;
   constructor(
     private userService: GenericService<User>,
     private router: Router
-  ) {
-    // Close dropdowns when clicking outside
-    document.addEventListener('click', (e: Event) => {
-      const target = e.target as HTMLElement;
-      if (!target.closest('.dropdown')) {
-        this.closeAllDropdowns();
-      }
-    });
-  }
+  ) {}
   ngOnInit(): void {
     this.updateUserFirstName();
+    this.FetchUserId();
     this.isUserAdmin = localStorage.getItem('isAdmin') === 'true';
   }
-
+  FetchUserId(): void {
+    this.userId = parseInt(localStorage.getItem('userId') || '0', 10);
+    console.log(this.userId);
+  }
   updateUserFirstName(): void {
     this.userFirstName = localStorage.getItem('firstName');
   }
@@ -49,33 +45,6 @@ export class AppComponent {
     alert('Logged out successfully.');
     this.router.navigate(['/login']).then(() => {
       window.location.reload();
-    });
-  }
-  toggleDropdown(event: Event) {
-    event.preventDefault();
-    event.stopPropagation();
-
-    const dropdownElement = (event.currentTarget as HTMLElement).closest(
-      '.dropdown'
-    );
-    const wasActive = dropdownElement?.classList.contains('active');
-
-    // Close all other dropdowns
-    this.closeAllDropdowns();
-
-    // Toggle current dropdown if it wasn't already active
-    if (!wasActive && dropdownElement) {
-      dropdownElement.classList.add('active');
-      const menu = dropdownElement.querySelector('.dropdown-menu');
-      menu?.classList.add('show');
-    }
-  }
-
-  closeAllDropdowns() {
-    document.querySelectorAll('.dropdown').forEach((dropdown) => {
-      dropdown.classList.remove('active');
-      const menu = dropdown.querySelector('.dropdown-menu');
-      menu?.classList.remove('show');
     });
   }
 

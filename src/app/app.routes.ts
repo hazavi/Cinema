@@ -18,6 +18,7 @@ import { CreateShowtimeComponent } from './components/create-showtime/create-sho
 import { MovieComponent } from './components/movie/movie.component';
 import { RegisterComponent } from './components/register/register.component';
 import { adminGuard } from './guards/admin.guard';
+import { ProfileComponent } from './components/profile/profile.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' }, // Default redirect to home
@@ -26,6 +27,7 @@ export const routes: Routes = [
   { path: 'register', component: RegisterComponent }, // Register Page
   { path: 'movie/:id/:movieName', component: MovieComponent }, // Movie Page
   { path: 'showing', component: ShowingComponent }, // Showing page
+  { path: 'profile/:id', component: ProfileComponent }, // Profile page
 
   
   // Admin-related routes

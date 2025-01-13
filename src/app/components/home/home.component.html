@@ -1,42 +1,60 @@
-<!-- home.component.html -->
 <div class="home-container">
-    <!-- Slideshow Section -->
-    <div class="slideshow-container">
-        <div class="slides fade">
-            <img src="assets/imgs/c1.jpg" alt="Cinema 1" />
+    <!-- Combined Slideshow and Hero Section -->
+    <div class="hero-slideshow-container">
+        <!-- Slideshow Background -->
+        <div class="slideshow-container">
+            <div *ngFor="let slide of slides; let i = index" class="slides" [ngClass]="{'active': currentSlide === i}">
+                <img [src]="slide" [alt]="'Slide ' + (i + 1)" />
+            </div>
+
+            <!-- Navigation Buttons -->
+            <button class="nav-btn prev" (click)="prevSlide()">
+                <span class="arrow">‹</span>
+            </button>
+            <button class="nav-btn next" (click)="nextSlide()">
+                <span class="arrow">›</span>
+            </button>
         </div>
-        <div class="slides fade">
-            <img src="assets/imgs/c2.jpg" alt="Cinema 2" />
-        </div>
-        <div class="slides fade">
-            <img src="assets/imgs/c3.jpg" alt="Cinema 3" />
+
+        <!-- Overlay and Hero Content -->
+        <div class="hero-section">
+            <div class="hero-content glass-card">
+                <h1>Welcome</h1>
+                <p class="subtitle">Discover the latest movies, showtimes, and more!</p>
+                <button class="btn-primary" routerLink="/login">
+                    <span>Get Started</span>
+                    <span class="btn-arrow">→</span>
+                </button>
+            </div>
         </div>
     </div>
 
-    <div class="hero-section">
-        <div class="hero-content">
-            <h1>Welcome to Our Cinema</h1>
-            <p>Discover the latest movies, showtimes, and more!</p>
-            <button class="btn-primary" routerLink="/login">Login</button>
-        </div>
-    </div>
-
+    <!-- Movie Section -->
     <div class="movie-section">
-        <h2>Latest Releases</h2>
+        <div class="section-header">
+            <h2>Latest Releases</h2>
+            <div class="header-line"></div>
+        </div>
         <div class="movie-grid">
-            <!-- Example movie posters, replace with dynamic content if needed -->
-            <div class="movie-card">
-                <img src="assets/movie1.jpg" alt="Movie 1" />
-                <h3>Movie Title 1</h3>
-            </div>
-            <div class="movie-card">
-                <img src="assets/movie2.jpg" alt="Movie 2" />
-                <h3>Movie Title 2</h3>
-            </div>
-            <div class="movie-card">
-                <img src="assets/movie3.jpg" alt="Movie 3" />
-                <h3>Movie Title 3</h3>
+            <!-- Displaying Movie Cards -->
+            <div *ngFor="let movie of movies" class="movie-card">
+                <div class="card-image">
+                    <img [src]="movie.posterUrl" [alt]="movie.title" />
+                    <div class="card-overlay" (click)="viewMovie(movie.movieId, movie.title)">
+                        <span class="watch-logo">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="50px" viewBox="0 -960 960 960" width="50px"
+                                fill="#e8eaed">
+                                <path
+                                    d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500q0-45 31.5-76.5T480-608q45 0 76.5 31.5T588-500q0 45-31.5 76.5T480-392Zm0 192q-146 0-266-81.5T40-500q54-137 174-218.5T480-800q146 0 266 81.5T920-500q-54 137-174 218.5T480-200Zm0-300Zm0 220q113 0 207.5-59.5T832-500q-50-101-144.5-160.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280Z" />
+                            </svg> </span>
+                            <span class="watch-now">Watch Now</span>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h3 class="movie-title">{{ movie.title }}</h3>
+                </div>
             </div>
         </div>
     </div>
+
 </div>

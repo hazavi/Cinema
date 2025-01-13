@@ -1,10 +1,38 @@
-/* home.component.css */
+/* Modern Variables */
+:root {
+  --primary-color: #6366f1;
+  --primary-hover: #4f46e5;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --background: #0f172a;
+  --card-bg: #1e293b;
+  --overlay-dark: rgba(15, 23, 42, 0.8);
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.05);
+}
+
+/* Global Styles */
+.home-container {
+  font-family: "Inter", sans-serif;
+  background-color: var(--background);
+  min-height: 100vh;
+  color: var(--text-primary);
+}
+
+/* Hero Slideshow Container */
+.hero-slideshow-container {
+  position: relative;
+  height: 65vh;
+  overflow: hidden;
+}
+
 /* Slideshow Styles */
 .slideshow-container {
-  position: relative;
-  max-width: 100%;
-  height: 400px; /* Set the height of the slideshow */
-  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .slides {
@@ -12,124 +40,333 @@
   position: absolute;
   width: 100%;
   height: 100%;
+  opacity: 0;
+  transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.slides.active {
+  display: block;
+  opacity: 1;
+}
+
+.slides::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(15, 23, 42, 0.2),
+    rgba(15, 23, 42, 0.95)
+  );
 }
 
 .slides img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: opacity 1s ease-in-out;
 }
 
-/* Fade effect */
-.fade {
-  animation: fade 15s infinite;
+/* Navigation Buttons */
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(8px);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  z-index: 10;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-@keyframes fade {
-  0% {
-    opacity: 0;
-  }
-  20% {
-    opacity: 1;
-  }
-  33% {
-    opacity: 0;
-  }
-  66% {
-    opacity: 0;
-  }
-  80% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
+.nav-btn .arrow {
+  color: #fff;
+  font-size: 24px;
+  line-height: 1;
 }
 
-/* Hero Section Styles */
+.prev {
+  left: 25px;
+}
+.next {
+  right: 25px;
+}
+
+.nav-btn:hover {
+  background: var(--glass-bg);
+  transform: translateY(-50%) scale(1.1);
+}
+
+/* Hero Section */
 .hero-section {
+  position: relative;
+  z-index: 2;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 80vh;
-  background-color: rgba(0, 0, 0, 0.5);
-  color: #fff;
+  height: 100%;
+  padding: 0 20px;
+}
+
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(11px);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  padding: 48px;
   text-align: center;
+  max-width: 600px;
+  width: 100%;
 }
 
 .hero-content {
-  max-width: 600px;
-  margin: 0 20px;
+  animation: slideUp 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .hero-content h1 {
-  font-size: 3rem;
+  font-size: 4.5rem;
   font-weight: 700;
   margin-bottom: 20px;
+  background: linear-gradient(to right, #fff, #94a3b8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  line-height: 1.1;
 }
 
-.hero-content p {
-  font-size: 1.25rem;
-  margin-bottom: 30px;
+.subtitle {
+  font-size: 1.5rem;
+  color: var(--text-secondary);
+  margin-bottom: 40px;
+  font-weight: 400;
 }
 
 .btn-primary {
-  padding: 12px 20px;
-  font-size: 1rem;
-  background-color: #ff6f61;
-  color: #fff;
+  background: var(--primary-color);
+  color: white;
   border: none;
-  border-radius: 5px;
+  padding: 16px 32px;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .btn-primary:hover {
-  background-color: #ff3e30;
+  background: var(--primary-hover);
+  transform: translateY(-2px);
 }
 
+.btn-arrow {
+  transition: transform 0.3s ease;
+}
+
+.btn-primary:hover .btn-arrow {
+  transform: translateX(4px);
+}
+
+/* Movie Section */
 .movie-section {
-  padding: 40px 20px;
-  text-align: center;
+  padding: 80px 20px;
+  background: var(--background);
 }
 
-.movie-section h2 {
+.section-header {
+  text-align: center;
+  margin-bottom: 60px;
+  position: relative;
+}
+
+.section-header h2 {
   font-size: 2.5rem;
-  margin-bottom: 30px;
-  color: #333;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 20px;
+}
+
+.header-line {
+  width: 60px;
+  height: 4px;
+  background: var(--primary-color);
+  margin: 0 auto;
+  border-radius: 2px;
 }
 
 .movie-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .movie-card {
-  background-color: #333;
-  border-radius: 10px;
+  background: var(--card-bg);
   overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.3s ease;
 }
 
-.movie-card img {
+.card-image {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-image img {
+  width: 100%;
+  height: 480px;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+  border-radius: 12px;
+}
+
+/* Card Overlay */
+.card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  background: rgba(0, 0, 0, 0.2); /* Transparent background for glass effect */
+  backdrop-filter: blur(5px); /* Creates the blur effect */
+  -webkit-backdrop-filter: blur(10px); /* For Safari support */
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  align-items: center; /* Center children horizontally */
+  justify-content: center; /* Center children vertically */
+  opacity: 0;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border-radius: 12px;
 }
 
-.movie-card h3 {
-  padding: 10px;
-  background-color: rgba(0, 0, 0, 0.7);
-  color: #fff;
-  text-align: center;
+/* Watch Logo Styles */
+.watch-logo {
+  color: var(--primary-color);
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 500;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+/* Watch Now Styles */
+.watch-now {
+  color: var(--text-primary);
   font-size: 1.2rem;
-  margin: 0;
+  font-weight: 600;
+}
+
+.movie-card:hover .watch-logo,
+.movie-card:hover .watch-now {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
 }
 
 .movie-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  transform: translateY(-8px);
+  border-radius: 12px;
+}
+
+.movie-card:hover .card-overlay {
+  opacity: 1;
+}
+
+.movie-card:hover .watch-btn {
+  transform: translateY(0);
+}
+
+.movie-card:hover img {
+  transform: scale(1.05);
+}
+
+.card-content {
+  padding: 20px;
+}
+
+.card-content h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-align: center; /* Center the movie title */
+  margin-bottom: 10px;
+}
+
+.movie-info {
+  display: flex;
+  justify-content: space-between;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.rating::before {
+  content: "★";
+  color: #fbbf24;
+  margin-right: 4px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero-content h1 {
+    font-size: 3rem;
+  }
+
+  .subtitle {
+    font-size: 1.25rem;
+  }
+
+  .glass-card {
+    padding: 32px;
+  }
+
+  .movie-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-content h1 {
+    font-size: 2.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+  }
+
+  .btn-primary {
+    padding: 14px 24px;
+    font-size: 1rem;
+  }
+
+  .card-image img {
+    height: 300px;
+  }
 }

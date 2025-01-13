@@ -1,10 +1,39 @@
-<h1>Showings</h1>
-<div class="movies-container">
-  <div class="movie-card" *ngFor="let movie of movies" (click)="viewMovie(movie.movieId, movie.title)">
-    <img [src]="movie.posterUrl" alt="{{ movie.title }}" class="movie-poster" />
-    <div class="movie-details">
-      <h3 class="movie-title">{{ movie.title }}</h3>
-      <p class="movie-genres">{{ movie.genreNames }}</p>
+<section class="showings-section">
+  <div class="section-header">
+    <h1>Now Showing</h1>
+    <div class="header-accent"></div>
+  </div>
+
+  <div class="movies-container">
+    <div class="movie-card" *ngFor="let movie of movies" (click)="viewMovie(movie.movieId, movie.title)">
+      <div class="poster-wrapper">
+        <img [src]="movie.posterUrl" alt="{{ movie.title }}" class="movie-poster" />
+        <div class="poster-overlay">
+          <div class="overlay-content">
+            <span class="play-icon"><svg xmlns="http://www.w3.org/2000/svg" height="50px" viewBox="0 -960 960 960"
+                width="50px" fill="#e8eaed">
+                <path
+                  d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500q0-45 31.5-76.5T480-608q45 0 76.5 31.5T588-500q0 45-31.5 76.5T480-392Zm0 192q-146 0-266-81.5T40-500q54-137 174-218.5T480-800q146 0 266 81.5T920-500q-54 137-174 218.5T480-200Zm0-300Zm0 220q113 0 207.5-59.5T832-500q-50-101-144.5-160.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280Z" />
+              </svg></span>
+            <span class="view-details">View Details</span>
+          </div>
+        </div>
+      </div>
+      <div class="movie-details">
+        <h3 class="movie-title">{{ movie.title }}</h3>
+        <div class="movie-meta">
+          <span class="movie-genres">{{ movie.genreNames }}</span>
+          <div class="rating">
+            <span class="star">★</span>
+            <span class="rating-value">{{movie.rating}}</span>
+          </div>
+        </div>
+        <button class="book-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#e8eaed">
+            <path
+              d="m368-320 112-84 110 84-42-136 112-88H524l-44-136-44 136H300l110 88-42 136ZM160-160q-33 0-56.5-23.5T80-240v-135q0-11 7-19t18-10q24-8 39.5-29t15.5-47q0-26-15.5-47T105-556q-11-2-18-10t-7-19v-135q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v135q0 11-7 19t-18 10q-24 8-39.5 29T800-480q0 26 15.5 47t39.5 29q11 2 18 10t7 19v135q0 33-23.5 56.5T800-160H160Zm0-80h640v-102q-37-22-58.5-58.5T720-480q0-43 21.5-79.5T800-618v-102H160v102q37 22 58.5 58.5T240-480q0 43-21.5 79.5T160-342v102Zm320-240Z" />
+          </svg> Buy</button>
+      </div>
     </div>
   </div>
-</div>
+</section>

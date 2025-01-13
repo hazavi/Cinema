@@ -12,7 +12,10 @@ export class Movie {
   genreIds: number[] = [];
   genreNames?: string;
   isShowing: boolean = false;
+  constructor(init?: Partial<Movie>) {
+    Object.assign(this, init);
+  }
 }
-  // movieGenres: MovieGenre[] = [];
-  // Director
-  // Distributed by
+// movieGenres: MovieGenre[] = [];
+// Director
+// Distributed by

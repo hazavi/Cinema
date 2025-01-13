@@ -30,9 +30,11 @@ export class LoginComponent {
         console.log('Login successful!', response);
 
         localStorage.setItem('token', response.token || ''); // Store token
+        localStorage.setItem('userId', response.userId.toString());
         localStorage.setItem('firstName', response.firstName || ''); // Store first name
         localStorage.setItem('lastName', response.lastName || ''); // Store last name
         localStorage.setItem('isAdmin', String(response.isAdmin)); // Store role info (admin)
+        const userId = parseInt(localStorage.getItem('userId') || '0', 10);
 
         alert('Login successful!');
         this.router.navigate(['/home']).then(() => {
