@@ -16,7 +16,6 @@ export class LoginComponent {
   loginRequest: LoginRequest = {
     email: '',
     password: '',
-    token: '',
   };
   errorMessage: string | undefined;
 
@@ -28,9 +27,16 @@ export class LoginComponent {
   login(): void {
     this.authService.login(this.loginRequest).subscribe(
       (response: LoginResponse) => {
-        // Use LoginResponseDto here
-        localStorage.setItem('token', response.token || ''); // If token is undefined, set an empty string
-        this.router.navigate(['/home']); // Redirect to a protected page
+        console.log('Login successful!', response);
+
+        localStorage.setItem('token', response.token || ''); // Store token
+        localStorage.setItem('firstName', response.firstName || ''); // Store first name
+        localStorage.setItem('lastName', response.lastName || ''); // Store last name
+        localStorage.setItem('isAdmin', String(response.isAdmin)); // Store role info (admin)
+
+        this.router.navigate(['/home']).then(() => {
+          window.location.reload();
+        }); // Redirect to a protected page
       },
       (error) => {
         this.errorMessage = 'Invalid credentials, please try again.';

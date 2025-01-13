@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+
 :root {
   --primary-color: #571db4;
   --text-color: #fff;
@@ -137,9 +138,11 @@
   z-index: 1000;
   transition: opacity 0.2s ease, visibility 0.2s ease;
 }
+
 .more-menu {
   display: flex;
 }
+
 .dropdown.active .dropdown-menu {
   opacity: 1;
   visibility: visible;
@@ -158,13 +161,12 @@
   transition: color 0.2s ease;
 }
 
-
 .dropdown-menu a:hover::after {
-  width: 100%; 
+  width: 100%;
 }
 
 .dropdown-menu a:hover {
-  color: #e9e9e9; 
+  color: #e9e9e9;
 }
 
 /* Animation for the dropdown arrow */
@@ -178,6 +180,7 @@
   transform: rotate(180deg);
 }
 
+/* Content section */
 .content {
   margin-top: 50px;
   padding: 2rem;
@@ -266,4 +269,75 @@
 /* Prevent body scroll when mobile menu is open */
 body.menu-open {
   overflow: hidden;
+}
+
+/* Styling for the logout and login sections */
+.nav-end span {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.nav-end button {
+  background: none;
+  border: 1px solid #fff;
+  padding: 5px 15px;
+  margin-left: 10px;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 20px;
+  transition: background 0.3s ease, transform 0.2s ease;
+  margin-left: 10px;
+}
+
+.nav-end button:hover {
+  transform: scale(1.05);
+}
+
+.nav-end a {
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nav-end a:hover {
+  color: #e8eaed;
+}
+
+.nav-end a svg {
+  width: 24px;
+  height: 24px;
+  fill: #fff;
+  transition: transform 0.3s ease;
+}
+
+.user-info a.user-name {
+  text-decoration: none;
+  color: #e8eaed;
+  font-weight: 500;
+  cursor: pointer;
+  margin-right: 10px;
+  position: relative;
+  
+}
+
+.user-info a.user-name:hover {
+  color: #fff; /* change color on hover */
+}
+
+.user-info a.user-name::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #e8eaed;
+  transition: width 0.3s ease;
+}
+
+.user-info a.user-name:hover::after {
+  width: 100%;
 }

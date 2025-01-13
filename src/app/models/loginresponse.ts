@@ -1,8 +1,8 @@
-export class LoginResponse {
-  userId: number = 0;
-  firstName: string = '';
-  lastName: string = '';
-  email: string = '';
-  isAdmin: boolean = false;
-  token: string = '';
+export interface  LoginResponse {
+  userId: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  isAdmin: boolean;
+  token: string;
 }

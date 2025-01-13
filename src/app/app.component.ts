@@ -1,28 +1,53 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { UserComponent } from './components/user/user.component';
 import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { GenericService } from './service/generic.service';
+import { User } from './models/user';
 
 // Decorator for the component
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [FormsModule, RouterModule],
+  imports: [FormsModule, RouterModule, CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
 export class AppComponent {
   title = 'Cinema';
   isMobileMenuOpen = false;
+  userFirstName: string | null = null;
+  user: User | null = null;
+  isUserAdmin: boolean = false;
 
-  constructor() {
+  constructor(
+    private userService: GenericService<User>,
+    private router: Router
+  ) {
     // Close dropdowns when clicking outside
     document.addEventListener('click', (e: Event) => {
       const target = e.target as HTMLElement;
       if (!target.closest('.dropdown')) {
         this.closeAllDropdowns();
       }
+    });
+  }
+  ngOnInit(): void {
+    this.updateUserFirstName();
+    this.isUserAdmin = localStorage.getItem('isAdmin') === 'true';
+  }
+
+  updateUserFirstName(): void {
+    this.userFirstName = localStorage.getItem('firstName');
+  }
+
+  logout(): void {
+    localStorage.clear();
+    this.userFirstName = null;
+    this.router.navigate(['/login']).then(() => {
+      window.location.reload();
     });
   }
   toggleDropdown(event: Event) {
