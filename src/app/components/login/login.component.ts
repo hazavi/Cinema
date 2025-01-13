@@ -34,6 +34,7 @@ export class LoginComponent {
         localStorage.setItem('lastName', response.lastName || ''); // Store last name
         localStorage.setItem('isAdmin', String(response.isAdmin)); // Store role info (admin)
 
+        alert('Login successful!');
         this.router.navigate(['/home']).then(() => {
           window.location.reload();
         }); // Redirect to a protected page

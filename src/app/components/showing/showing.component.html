@@ -1,3 +1,4 @@
+<h1>Showings</h1>
 <div class="movies-container">
   <div class="movie-card" *ngFor="let movie of movies" (click)="viewMovie(movie.movieId, movie.title)">
     <img [src]="movie.posterUrl" alt="{{ movie.title }}" class="movie-poster" />

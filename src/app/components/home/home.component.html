@@ -1,1 +1,42 @@
-<button routerLink="/login">Login</button>
+<!-- home.component.html -->
+<div class="home-container">
+    <!-- Slideshow Section -->
+    <div class="slideshow-container">
+        <div class="slides fade">
+            <img src="assets/imgs/c1.jpg" alt="Cinema 1" />
+        </div>
+        <div class="slides fade">
+            <img src="assets/imgs/c2.jpg" alt="Cinema 2" />
+        </div>
+        <div class="slides fade">
+            <img src="assets/imgs/c3.jpg" alt="Cinema 3" />
+        </div>
+    </div>
+
+    <div class="hero-section">
+        <div class="hero-content">
+            <h1>Welcome to Our Cinema</h1>
+            <p>Discover the latest movies, showtimes, and more!</p>
+            <button class="btn-primary" routerLink="/login">Login</button>
+        </div>
+    </div>
+
+    <div class="movie-section">
+        <h2>Latest Releases</h2>
+        <div class="movie-grid">
+            <!-- Example movie posters, replace with dynamic content if needed -->
+            <div class="movie-card">
+                <img src="assets/movie1.jpg" alt="Movie 1" />
+                <h3>Movie Title 1</h3>
+            </div>
+            <div class="movie-card">
+                <img src="assets/movie2.jpg" alt="Movie 2" />
+                <h3>Movie Title 2</h3>
+            </div>
+            <div class="movie-card">
+                <img src="assets/movie3.jpg" alt="Movie 3" />
+                <h3>Movie Title 3</h3>
+            </div>
+        </div>
+    </div>
+</div>

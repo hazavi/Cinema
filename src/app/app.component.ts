@@ -46,6 +46,7 @@ export class AppComponent {
   logout(): void {
     localStorage.clear();
     this.userFirstName = null;
+    alert('Logged out successfully.');
     this.router.navigate(['/login']).then(() => {
       window.location.reload();
     });

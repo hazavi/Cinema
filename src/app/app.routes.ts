@@ -17,6 +17,7 @@ import { CreateTheaterComponent } from './components/create-theater/create-theat
 import { CreateShowtimeComponent } from './components/create-showtime/create-showtime.component';
 import { MovieComponent } from './components/movie/movie.component';
 import { RegisterComponent } from './components/register/register.component';
+import { adminGuard } from './guards/admin.guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' }, // Default redirect to home
@@ -24,10 +25,13 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent }, // Login Page
   { path: 'register', component: RegisterComponent }, // Register Page
   { path: 'movie/:id/:movieName', component: MovieComponent }, // Movie Page
+  { path: 'showing', component: ShowingComponent }, // Showing page
 
+  
   // Admin-related routes
   {
     path: 'admin',
+    canActivate: [adminGuard],
     children: [
       { path: '', component: AdminComponent },
       { path: 'add-movie', component: CreateMovieComponent }, // Create movie form
@@ -44,6 +48,7 @@ export const routes: Routes = [
   // User-related routes
   {
     path: 'users',
+    canActivate: [adminGuard],
     children: [
       { path: '', component: UserComponent }, // User list
       { path: 'create', component: CreateUserComponent }, // Create user
@@ -52,6 +57,5 @@ export const routes: Routes = [
     ],
   },
 
-  // Showing-related routes
-  { path: 'showing', component: ShowingComponent }, // Showing page
+
 ];
