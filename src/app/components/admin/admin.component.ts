@@ -11,13 +11,14 @@ import { MovieGenre } from '../../models/moviegenre';
 import { Address } from '../../models/address';
 import { Theater } from '../../models/theater';
 import { Showtime } from '../../models/showtime';
+import { Seat } from '../../models/seat';
 
 @Component({
   selector: 'app-admin',
   imports: [CommonModule, CommonModule, RouterModule],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css',
-  providers: [DatePipe], 
+  providers: [DatePipe],
 })
 export class AdminComponent {
   userList: User[] = [];
@@ -28,6 +29,7 @@ export class AdminComponent {
   addressList: Address[] = [];
   theaterList: Theater[] = [];
   showtimeList: Showtime[] = [];
+  seatList: Seat[] = [];
   activeContent: string = 'dashboard'; // Default content to display
 
   constructor(
@@ -39,6 +41,7 @@ export class AdminComponent {
     private addressService: GenericService<Address>,
     private theaterService: GenericService<Theater>,
     private showtimeService: GenericService<Showtime>,
+    private seatService: GenericService<Seat>,
     private router: Router,
     private datePipe: DatePipe
   ) {}
@@ -99,6 +102,10 @@ export class AdminComponent {
     this.showtimeService.getAll('Showtimes').subscribe((data: Showtime[]) => {
       this.showtimeList = data;
     });
+    // Generic - Get All Seat
+    this.seatService.getAll('Seats').subscribe((data: Seat[]) => {
+      this.seatList = data;
+    });
   }
   getPostalName(postalCodeId: number): string {
     const postal = this.postalCodeList.find(
@@ -148,6 +155,12 @@ export class AdminComponent {
   deleteShowtime(id: number) {
     this.showtimeService.deletebyid('Showtimes', id).subscribe(() => {
       alert(`Showtime with ID: ${id}, is deleted successfully`);
+    });
+  }
+  // Delete Seat
+  deleteSeat(id: number) {
+    this.seatService.deletebyid('Seats', id).subscribe(() => {
+      alert(`Seat with ID: ${id}, is deleted successfully`);
     });
   }
 }

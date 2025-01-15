@@ -19,6 +19,8 @@ import { MovieComponent } from './components/movie/movie.component';
 import { RegisterComponent } from './components/register/register.component';
 import { adminGuard } from './guards/admin.guard';
 import { ProfileComponent } from './components/profile/profile.component';
+import { OrderComponent } from './components/order/order.component';
+import { CreateSeatComponent } from './components/create-seat/create-seat.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' }, // Default redirect to home
@@ -28,8 +30,8 @@ export const routes: Routes = [
   { path: 'movie/:id/:movieName', component: MovieComponent }, // Movie Page
   { path: 'showing', component: ShowingComponent }, // Showing page
   { path: 'profile/:id', component: ProfileComponent }, // Profile page
+  { path: 'order/:showtimeId', component: OrderComponent }, // Order page
 
-  
   // Admin-related routes
   {
     path: 'admin',
@@ -44,6 +46,7 @@ export const routes: Routes = [
       { path: 'create-address', component: CreateAddressComponent }, // Create address
       { path: 'create-theater', component: CreateTheaterComponent }, // Create theater
       { path: 'create-showtime', component: CreateShowtimeComponent }, // Create Showtime
+      { path: 'create-seat', component: CreateSeatComponent }, // Create Seat
     ],
   },
 
@@ -58,6 +61,4 @@ export const routes: Routes = [
       { path: 'update/:id', component: UpdateUserComponent }, // Update user
     ],
   },
-
-
 ];

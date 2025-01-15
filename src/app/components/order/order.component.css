@@ -1,0 +1,257 @@
+/* Seating Layout Core Styles */
+.container {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Screen Styles */
+.screen-container {
+  text-align: center;
+  margin-bottom: 3rem;
+  position: relative;
+  width: 100%;
+}
+
+.screen {
+  width: 75%;
+  height: 2rem;
+  margin: 0 auto;
+  background: linear-gradient(to right, #60a5fa, #2563eb);
+  border-radius: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.screen-label {
+  font-size: 0.875rem;
+  color: #dadada;
+}
+
+/* Seating Grid Layout */
+.seating-container {
+  width: 75%;
+  margin: 0 auto 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.seat-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.row-label {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.row-label span {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.seats-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  flex: 1;
+}
+
+/* Seat SVG Styles */
+.seat {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* SVG Fill Colors for Different States */
+.seat svg {
+  transition: all 0.2s ease;
+}
+
+.seat.available svg path,
+.seat.available svg rect {
+  fill: #800496;
+
+}
+
+.seat.available:hover svg path,
+.seat.available:hover svg rect {
+  fill: white;
+}
+
+.seat.selected svg path,
+.seat.selected svg rect {
+  fill: white;
+}
+
+.seat.unavailable svg path,
+.seat.unavailable svg rect {
+  fill: #d20000;
+}
+
+.seat.unavailable {
+  cursor: not-allowed;
+}
+
+/* Legend Styles */
+.seat-legend {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.legend-box {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 0.25rem;
+}
+
+.legend-box.available {
+  background-color: #800496;
+}
+
+.legend-box.selected {
+  background-color: white;
+}
+
+.legend-box.unavailable {
+  background-color: #d20000;
+}
+
+.legend-item span {
+  font-size: 0.875rem;
+  color: #dadada;
+}
+
+/* Ticket Section */
+.ticket-section {
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  margin-top: 2rem;
+}
+
+.ticket-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.ticket-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+}
+
+.ticket-info h3 {
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.price {
+  font-size: 0.875rem;
+  color: #dadada;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.quantity-btn {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 9999px;
+  border: 1px solid #d1d5db;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  transition: background-color 0.2s ease;
+}
+
+.quantity-btn:hover {
+  background-color: #f3f4f6;
+}
+
+.quantity-display {
+  width: 2rem;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* Summary Section */
+.summary-section {
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  margin-top: 2rem;
+}
+
+.summary-content {
+  display: grid;
+  gap: 1rem;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.summary-row:last-child {
+  border-bottom: none;
+}
+
+.summary-label {
+  color: #dadada;
+}
+
+.summary-value {
+  font-weight: 500;
+}
+
+.complete-order-btn {
+  width: 100%;
+  margin-top: 1.5rem;
+  padding: 0.75rem 1.5rem;
+  background-color: #2563eb;
+  color: white;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+}
+
+.complete-order-btn:hover {
+  background-color: #1d4ed8;
+}
+
+.complete-order-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #93c5fd;
+}

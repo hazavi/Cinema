@@ -27,6 +27,9 @@
             <li>
                 <div (click)="showContent('showtimes')">Showtime</div>
             </li>
+            <li>
+                <div (click)="showContent('seats')">Seat</div>
+            </li>
         </ul>
     </div>
 
@@ -279,6 +282,40 @@
                             <button class="btn btn-update"
                                 [routerLink]="['/admin/update-showtime', s.showtimeId]">Update</button>
                             <button class="btn btn-delete" (click)="deleteShowtime(s.showtimeId)">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- Seat Content -->
+        <div *ngIf="activeContent === 'seats'" class="model-content">
+            <h2>Seats</h2>
+            <button class="create-btn" routerLink="/admin/create-seat">+ Add Seat</button>
+            <!-- Seat Table -->
+            <table class="Seat-table">
+                <thead>
+                    <tr>
+                        <th>Seat Id</th>
+                        <th>Row Number</th>
+                        <th>Seat Number</th>
+                        <th>isAvailable</th>
+                        <th>thearterId</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let s of seatList" class="model-item">
+                        <td>{{ s.seatId }}</td>
+                        <td>{{ s.rowNumber }}</td>
+                        <td>{{ s.seatNumber }}</td>
+                        <td>{{ s.isAvailable }}</td>
+                        <td>{{ s.theaterId }}</td>
+                        <td>
+                            <button class="btn btn-view"
+                                [routerLink]="['/admin/view-seat', s.seatId]">View</button>
+                            <button class="btn btn-update"
+                                [routerLink]="['/admin/update-seat', s.seatId]">Update</button>
+                            <button class="btn btn-delete" (click)="deleteSeat(s.seatId)">Delete</button>
                         </td>
                     </tr>
                 </tbody>

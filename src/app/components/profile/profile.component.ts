@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { GenericService } from '../../service/generic.service';
 import { User } from '../../models/user';
 import { CommonModule } from '@angular/common';
+import { LoginResponse } from '../../models/loginresponse';
 
 @Component({
   selector: 'app-profile',
@@ -19,7 +20,7 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private userService: GenericService<User> // Inject GenericService with User model
+    private userService: GenericService<User>,
   ) {}
 
   ngOnInit(): void {
@@ -27,6 +28,7 @@ export class ProfileComponent implements OnInit {
       this.userId = +id; // Get userId from route params
       this.fetchUserDetails();
     });
+
   }
 
   fetchUserDetails(): void {

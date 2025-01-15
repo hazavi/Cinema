@@ -1,0 +1,99 @@
+<!-- Seating Layout Section -->
+<section class="seating-section">
+    <div class="container">
+        <!-- Screen Indicator -->
+        <div class="screen-container">
+            <div class="screen"></div>
+            <p class="screen-label">Screen</p>
+        </div>
+
+        <!-- Seating Grid -->
+        <div class="seating-container">
+            <div *ngFor="let row of seats; let rowIndex = index" class="seat-row">
+                <div class="row-label">
+                    <span>R{{rowIndex + 1}}</span>
+                </div>
+                <div class="seats-group">
+                    <div *ngFor="let seat of row" class="seat" [class.selected]="selectedSeats.includes(seat)"
+                        [class.unavailable]="!seat.isAvailable" [class.available]="seat.isAvailable"
+                        (click)="toggleSeatSelection(seat)">
+                        <span><svg class="seat" width="50px" height="50px" viewBox="-14.66 0 139.807 139.807"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <g id="cinema_seat" data-name="cinema seat" transform="translate(-539.386 -380.488)">
+                                    <path id="Path_4527" data-name="Path 4527"
+                                        d="M607.241,380.488H582.024a25.937,25.937,0,0,0-25.862,25.864v80.463H633.1V406.352A25.938,25.938,0,0,0,607.241,380.488Z" />
+                                    <path id="Path_4528" data-name="Path 4528"
+                                        d="M610.331,400.28c0,5.118-7.028,9.267-15.7,9.267s-15.7-4.149-15.7-9.267,7.028-9.268,15.7-9.268S610.331,395.162,610.331,400.28Z" />
+
+                                    <rect id="Rectangle_1771" data-name="Rectangle 1771" width="94.617" height="18.751"
+                                        transform="translate(547.324 472.878)" />
+                                    <path id="Path_4530" data-name="Path 4530"
+                                        d="M539.386,438v56.614a6.916,6.916,0,0,0,6.9,6.9h9.879v-66.1h-14.19A2.594,2.594,0,0,0,539.386,438Zm107.91-2.586H633.1v66.1h9.88a6.917,6.917,0,0,0,6.9-6.9V438A2.594,2.594,0,0,0,647.3,435.411Z" />
+                                </g>
+                            </svg></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Legend -->
+        <div class="seat-legend">
+            <div class="legend-item">
+                <div class="legend-box available"></div>
+                <span>Available</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box selected"></div>
+                <span>Selected</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box unavailable"></div>
+                <span>Unavailable</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Ticket Configuration Section -->
+<section class="ticket-section">
+    <div class="container">
+        <h2 class="section-title">Select Tickets</h2>
+        <div class="ticket-grid">
+            <div *ngFor="let ticketType of ticketTypes" class="ticket-item">
+                <div class="ticket-info">
+                    <h3>{{ticketType.name}}</h3>
+                    <p class="price">${{ticketType.price}}</p>
+                </div>
+                <div class="quantity-controls">
+                    <button class="quantity-btn" (click)="updateTicketQuantity(ticketType.name, -1)">-</button>
+                    <span class="quantity-display">{{ticketQuantities[ticketType.name]}}</span>
+                    <button class="quantity-btn" (click)="updateTicketQuantity(ticketType.name, 1)">+</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Order Summary Section -->
+<section class="summary-section">
+    <div class="container">
+        <h2 class="section-title">Order Summary</h2>
+        <div class="summary-content">
+            <div class="summary-row">
+                <span class="summary-label">Selected Seats</span>
+                <span class="summary-value">{{formattedSelectedSeats}}</span>
+            </div>
+            <div class="summary-row">
+                <span class="summary-label">Ticket Type</span>
+                <span class="summary-value">{{selectedTicketType}}</span>
+            </div>
+            <!-- <div class="summary-row">
+                <span class="summary-label">Total Amount</span>
+                <span class="summary-value">{{totalPrice}}</span>
+            </div> -->
+        </div>
+        <button class="complete-order-btn" (click)="completeOrder()">
+            Complete Order
+        </button>
+    </div>
+</section>
