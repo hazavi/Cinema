@@ -1,123 +1,221 @@
-/* Form container */
+
+/* Reset Box Sizing */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Container Styles */
 .login-container {
-  max-width: 600px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--background);
+  padding: 1.5rem;
 }
 
-/* Title */
-h2 {
+.login-card {
+  width: 100%;
+  max-width: 440px;
+  background: var(--card-bg);
+  border-radius: 24px;
+  padding: 3rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+/* Header Styles */
+.login-header {
   text-align: center;
-  color: #333;
-  font-size: 1.75rem;
-  font-weight: 600;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2.5rem;
 }
 
-/* Form group */
-div {
-  margin-bottom: 15px;
+.login-header h2 {
+  color: var(--text-primary);
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
 }
 
-/* Labels */
+.subtitle {
+  color: var(--text-secondary);
+  font-size: 1rem;
+}
+
+/* Form Styles */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
 label {
-  font-weight: bold;
-  color: #333;
-  display: block;
-  margin-bottom: 5px;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  font-weight: 500;
 }
 
-/* Inputs */
+.input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
 input {
   width: 100%;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  font-size: 16px;
+  padding: 1rem;
+  padding-right: 2.5rem;
+  border: 1.5px solid var(--input-border);
+  border-radius: 12px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
   box-sizing: border-box;
-  background-color: #fff;
-  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-/* Focus state for inputs */
+input::placeholder {
+  color: #9ca3af;
+}
+
 input:focus {
-  border-color: #0056b3;
   outline: none;
-  box-shadow: 0 0 0 2px rgba(0, 86, 179, 0.2);
+  border-color: var(--input-focus);
+  box-shadow: 0 0 0 4px rgba(143, 0, 255, 0.1);
 }
 
-/* Buttons */
-button {
+.input-icon {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+}
+
+.input-icon.clickable {
+  pointer-events: auto;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.clickable:hover {
+  color: var(--primary-color);
+}
+
+/* Button Styles */
+.login-button {
   width: 100%;
-  padding: 12px;
-  background-color: #007bff;
+  padding: 1rem;
+  background: var(--primary-color);
   color: white;
   border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.1s ease-in-out;
-  margin-top: 15px;
-}
-
-/* Button hover effect */
-button:hover {
-  background-color: #0056b3;
-}
-
-/* Active state for buttons */
-button:active {
-  transform: translateY(1px);
-}
-
-/* Error message styling */
-.error-message {
-  color: #ff2a2a;
-  font-size: 0.875rem;
-  margin-top: 5px;
-  padding: 5px 10px;
-  border-radius: 4px;
-  background-color: #fff3f3;
-}
-
-/* Style for 'Don't have an account?' text */
-.login-container p {
-  text-align: center;
+  border-radius: 12px;
   font-size: 1rem;
-  margin-top: 15px;
-  color: #333;
-}
-
-/* Style for the register link */
-.login-container p a {
-  color: #007bff;
-  font-weight: bold;
-  text-decoration: none;
-  transition: color 0.3s;
-}
-
-/* Register link hover effect */
-.login-container p a:hover {
-  color: #0056b3;
+  font-weight: 600;
   cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  box-sizing: border-box;
 }
 
-/* Mobile responsiveness */
+.login-button:hover {
+  background: var(--primary-hover);
+  transform: translateY(-1px);
+}
+
+.login-button:active {
+  transform: translateY(0);
+}
+
+.login-button svg {
+  transition: transform 0.3s ease;
+}
+
+.login-button:hover svg {
+  transform: translateX(4px);
+}
+
+/* Register Link Styles */
+.register-link {
+  text-align: center;
+  margin-top: 1.5rem;
+  width: 100%;
+}
+
+.register-link p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.register-link a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.register-link a:hover {
+  color: var(--primary-hover);
+}
+
+/* Error Message Styles */
+.error-message {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  border-radius: 12px;
+  color: #dc2626;;
+  font-size: 0.9rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.error-message svg {
+  flex-shrink: 0;
+  color: #dc2626;;
+}
+
+/* Responsive Design */
 @media (max-width: 640px) {
-  .login-container {
+  .login-card {
+    padding: 2rem;
     margin: 1rem;
+  }
+
+  .login-header h2 {
+    font-size: 1.75rem;
+  }
+
+  input {
+    padding: 0.875rem;
+    font-size: 0.95rem;
+  }
+
+  .login-button {
+    padding: 0.875rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .login-card {
     padding: 1.5rem;
   }
-
-  h2 {
+  
+  .login-header h2 {
     font-size: 1.5rem;
-  }
-
-  button {
-    width: 100%;
   }
 }

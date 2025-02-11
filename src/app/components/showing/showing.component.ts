@@ -17,6 +17,7 @@ export class ShowingComponent implements OnInit {
   movies: Movie[] = []; // Stores movies that are currently showing
   genres: Genre[] = []; // Stores all genres
   movieGenres: MovieGenre[] = []; // Stores all movie-genre relationships
+  movieAvailable: Movie | null = null;
 
   constructor(
     private movieService: GenericService<Movie>,
@@ -31,6 +32,7 @@ export class ShowingComponent implements OnInit {
 
   private fetchMovies(): void {
     this.movieService.getAll('Movies').subscribe((movies) => {
+      
       this.movies = movies.filter((movie) => movie.isShowing); // Filter currently showing movies
       this.fetchGenres(); // Fetch genres after movies
     });
@@ -64,6 +66,7 @@ export class ShowingComponent implements OnInit {
       movie.genreNames = relatedGenreNames || 'No genres available';
     });
   }
+
 
   viewMovie(movieId: number, movieName: string): void {
     const formattedName = movieName.replace(/\s+/g, '-').toLowerCase(); // Format name for URL

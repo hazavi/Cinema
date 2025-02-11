@@ -24,10 +24,10 @@ import { CreateSeatComponent } from './components/create-seat/create-seat.compon
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' }, // Default redirect to home
-  { path: 'home', component: HomeComponent }, // Home Page
-  { path: 'login', component: LoginComponent }, // Login Page
-  { path: 'register', component: RegisterComponent }, // Register Page
-  { path: 'movie/:id/:movieName', component: MovieComponent }, // Movie Page
+  { path: 'home', component: HomeComponent, data: { title: 'Home - Bioma' }}, // Home Page
+  { path: 'login', component: LoginComponent, data: { title: 'Login - Bioma' }}, // Login Page
+  { path: 'register', component: RegisterComponent, data: { title: 'Register - Bioma' } }, // Register Page
+  { path: 'movie/:id/:movieName', component: MovieComponent}, // Movie Page
   { path: 'showing', component: ShowingComponent }, // Showing page
   { path: 'profile/:id', component: ProfileComponent }, // Profile page
   { path: 'order/:showtimeId', component: OrderComponent }, // Order page

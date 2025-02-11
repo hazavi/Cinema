@@ -23,6 +23,7 @@ export class RegisterComponent implements OnInit {
   };
   postalCodes: PostalCode[] = [];
   errorMessage: string | undefined;
+  showPassword: boolean = false;
 
   constructor(
     private authService: GenericService<RegisterModel>,

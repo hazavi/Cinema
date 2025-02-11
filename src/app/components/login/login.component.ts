@@ -18,7 +18,8 @@ export class LoginComponent {
     password: '',
   };
   errorMessage: string | undefined;
-
+  showPassword: boolean = false;
+  
   constructor(
     private authService: GenericService<LoginRequest>,
     private router: Router
@@ -35,7 +36,7 @@ export class LoginComponent {
         localStorage.setItem('lastName', response.lastName || ''); // Store last name
         localStorage.setItem('isAdmin', String(response.isAdmin)); // Store role info (admin)
         const userId = parseInt(localStorage.getItem('userId') || '0', 10);
-
+          
         alert('Login successful!');
         this.router.navigate(['/home']).then(() => {
           window.location.reload();

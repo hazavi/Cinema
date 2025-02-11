@@ -15,7 +15,7 @@ const httpOptions = {
   providedIn: 'root',
 })
 export class GenericService<Model> {
-  private readonly url: string = 'https://localhost:7206/api';
+  private readonly url: string = 'https://bioma.azurewebsites.net/api';
 
   constructor(private http: HttpClient) {}
 

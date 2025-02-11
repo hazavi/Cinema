@@ -1,73 +1,137 @@
 <div class="create-movie-container">
     <form [formGroup]="movieForm" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-            <label for="posterUrl">Poster URL:</label>
-            <input type="url" class="form-control" placeholder="assets/posters/..." formControlName="posterUrl"
-                required />
-            <div *ngIf="movieForm.get('posterUrl')?.invalid && movieForm.get('posterUrl')?.touched" class="error-text">
-                A valid poster URL is required.
-            </div>
+      <h1 class="form-title">Create New Movie</h1>
+      
+      <!-- Poster Image -->
+      <div class="form-group">
+        <label>
+          <span class="label-text">Poster Image</span>
+          <span class="label-hint">Upload movie poster</span>
+        </label>
+        <input 
+          type="file" 
+          formControlName="posterUrl"
+          (change)="onFileSelected($event)"
+          class="file-input"
+          required
+        />
+        <div *ngIf="movieForm.get('posterUrl')?.invalid && movieForm.get('posterUrl')?.touched" 
+             class="error-message">
+          <i class="error-icon">!</i>
+          Poster image is required.
         </div>
-
+      </div>
+  
+      <!-- Movie Title -->
+      <div class="form-group">
+        <label>
+          <span class="label-text">Movie Title</span>
+        </label>
+        <input 
+          type="text"
+          formControlName="title"
+          placeholder="Enter the movie title"
+          required
+        />
+      </div>
+  
+      <!-- Description -->
+      <div class="form-group">
+        <label>
+          <span class="label-text">Description</span>
+          <span class="label-hint">Provide a brief synopsis</span>
+        </label>
+        <textarea 
+          formControlName="description"
+          placeholder="Enter the movie description"
+          rows="6"
+          required
+        ></textarea>
+      </div>
+  
+      <!-- Duration and Rating Row -->
+      <div class="form-row">
         <div class="form-group">
-            <label for="title">Title:</label>
-            <input type="text" class="form-control" placeholder="Enter movie title" formControlName="title" required />
-            <div *ngIf="movieForm.get('title')?.invalid && movieForm.get('title')?.touched" class="error-text">
-                Title is required.
-            </div>
+          <label>
+            <span class="label-text">Duration</span>
+            <span class="label-hint">In minutes</span>
+          </label>
+          <input 
+            type="number"
+            formControlName="durationMinutes"
+            placeholder="120"
+            required
+          />
         </div>
-
+  
         <div class="form-group">
-            <label for="description">Description:</label>
-            <textarea class="form-control" placeholder="Enter movie description" formControlName="description" rows="6"
-                required></textarea>
-            <div *ngIf="movieForm.get('description')?.invalid && movieForm.get('description')?.touched"
-                class="error-text">
-                Description is required.
-            </div>
+          <label>
+            <span class="label-text">Rating</span>
+            <span class="label-hint">Scale of 1-10</span>
+          </label>
+          <input 
+            type="number"
+            formControlName="rating"
+            placeholder="8.5"
+            step="0.1"
+            required
+          />
+          <div *ngIf="movieForm.get('rating')?.invalid && movieForm.get('rating')?.touched"
+               class="error-message">
+            <i class="error-icon">!</i>
+            Rating must be between 1 and 10.
+          </div>
         </div>
-
+      </div>
+  
+      <!-- Release Date and Genres Row -->
+      <div class="form-row">
         <div class="form-group">
-            <label for="durationMinutes">Duration: </label>
-            <input type="number" class="form-control" placeholder="(minutes)" formControlName="durationMinutes"
-                required />
-            <div *ngIf="movieForm.get('durationMinutes')?.invalid && movieForm.get('durationMinutes')?.touched"
-                class="error-text">
-                Duration must be a positive number.
-            </div>
+          <label>
+            <span class="label-text">Release Date</span>
+          </label>
+          <input 
+            type="date"
+            formControlName="releaseDate"
+            required
+          />
         </div>
-
+  
         <div class="form-group">
-            <label for="rating">Rating:</label>
-            <input type="number" step="0.1" class="form-control" placeholder="(1-10)" formControlName="rating"
-                required />
-            <div *ngIf="movieForm.get('rating')?.invalid && movieForm.get('rating')?.touched" class="error-text">
-                Rating must be between 1 and 10.
-            </div>
+          <label>
+            <span class="label-text">Genres</span>
+            <span class="label-hint">Select multiple if needed</span>
+          </label>
+          <select 
+            formControlName="genreIds"
+            multiple
+          >
+            <option *ngFor="let genre of genres" [value]="genre.genreId">
+              {{ genre.genreName }}
+            </option>
+          </select>
         </div>
-
-        <div class="form-group">
-            <label for="releaseDate">Release Date:</label>
-            <input type="date" class="form-control" formControlName="releaseDate" required />
-            <div *ngIf="movieForm.get('releaseDate')?.invalid && movieForm.get('releaseDate')?.touched"
-                class="error-text">
-                Release date is required.
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="genreIds">Genres:</label>
-            <select formControlName="genreIds" multiple>
-                <option *ngFor="let genre of genres" [value]="genre.genreId">{{ genre.genreName }}</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="isShowing">Is Showing?</label>
-            <input type="checkbox" formControlName="isShowing" />
-        </div>
-
-
-        <button type="submit" class="btn btn-primary" [disabled]="!movieForm.valid">Create Movie</button>
+      </div>
+  
+      <!-- Currently Showing Checkbox -->
+      <div class="checkbox-group">
+        <label class="checkbox-label">
+          <input 
+            type="checkbox"
+            formControlName="isShowing"
+          />
+          <span>Currently Showing in Theaters</span>
+        </label>
+      </div>
+  
+      <!-- Submit Button -->
+      <button 
+        type="submit" 
+        [disabled]="!movieForm.valid"
+        class="submit-button"
+      >
+        Create Movie
+        <span class="button-arrow">→</span>
+      </button>
     </form>
-</div>
+  </div>

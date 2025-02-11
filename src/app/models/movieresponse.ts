@@ -1,7 +1,7 @@
 export interface MovieResponse {
   movieId: number;
   title: string;
-  posterUrl: string;
+  posterUrlBase64: string;
   description?: string;
   durationMinutes?: number;
   rating?: number;

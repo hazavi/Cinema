@@ -3,7 +3,7 @@ import { MovieGenre } from './moviegenre';
 
 export class Movie {
   movieId: number = 0;
-  posterUrl: string = '';
+  posterUrlBase64?: string | null;
   title: string = '';
   description: string = '';
   durationMinutes: number = 0;

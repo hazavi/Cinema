@@ -79,7 +79,7 @@ export class UpdateMovieComponent implements OnInit {
 
         // Patch the form with the movie data, including genreIds
         this.movieForm.patchValue({
-          posterUrl: movie.posterUrl,
+          posterUrl: movie.posterUrlBase64,
           title: movie.title,
           description: movie.description,
           durationMinutes: movie.durationMinutes,

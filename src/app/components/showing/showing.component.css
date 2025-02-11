@@ -1,17 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
 
 /* Modern Variables */
-:root {
-  --primary-color: #6366f1;
-  --primary-dark: #4f46e5;
-  --background: #0f172a;
-  --card-bg: #1e293b;
-  --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
-  --accent: #8b5cf6;
-  --gradient-start: rgba(99, 102, 241, 0.1);
-  --gradient-end: rgba(99, 102, 241, 0.05);
-}
+
 
 body {
   font-family: var(--font-family);
@@ -54,6 +44,15 @@ body {
   margin: 20px auto 0;
   border-radius: 2px;
 }
+.movie-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
 
 /* Grid Container */
 .movies-container {
@@ -66,8 +65,6 @@ body {
 
 /* Movie Card Styles */
 .movie-card {
-  background: var(--card-bg);
-  border-radius: 16px;
   overflow: hidden;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;

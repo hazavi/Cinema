@@ -1,3 +1,5 @@
+
+
 <section class="showings-section">
   <div class="section-header">
     <h1>Now Showing</h1>
@@ -7,7 +9,8 @@
   <div class="movies-container">
     <div class="movie-card" *ngFor="let movie of movies" (click)="viewMovie(movie.movieId, movie.title)">
       <div class="poster-wrapper">
-        <img [src]="movie.posterUrl" alt="{{ movie.title }}" class="movie-poster" />
+        <img class="movie-poster" src="data:image/jpeg;base64,{{ movie.posterUrlBase64 }}" alt="Movie Poster">
+   
         <div class="poster-overlay">
           <div class="overlay-content">
             <span class="play-icon"><svg xmlns="http://www.w3.org/2000/svg" height="50px" viewBox="0 -960 960 960"

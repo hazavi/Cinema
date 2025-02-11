@@ -37,9 +37,16 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.startSlideshow();
     this.movieService.getAll('Movies').subscribe((data: MovieResponse[]) => {
-      // Sort movies by creation date ascending if needed.
-      const sortedMovies = data.sort((a, b) => a.movieId - b.movieId); // Assuming `id` correlates to creation order.
-      this.movies = sortedMovies.slice(-4); // Fetch only the last 4 movies
+      // Sort movies by release date in descending order (latest first)
+      const sortedMovies = data.sort((a, b) => {
+        if (!a.releaseDate || !b.releaseDate) {
+          return 0; // Handle cases where releaseDate might be undefined
+        }
+        return new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime();
+      });
+    
+      // Fetch only the last 4 movies (latest 4 movies based on release date)
+      this.movies = sortedMovies.slice(0, 4);
     });
   }
 

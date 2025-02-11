@@ -1,42 +1,140 @@
 <div class="register-container">
-    <h2>Register</h2>
-    <form (ngSubmit)="register()">
-        <div>
-            <label for="firstName">First Name:</label>
-            <input type="text" id="firstName" [(ngModel)]="registerModel.firstName" name="firstName" required />
+    <div class="register-card">
+        <div class="register-header">
+            <h2>Create Account</h2>
+            <p class="subtitle">Please fill in your information to register</p>
         </div>
+        
+        <form (ngSubmit)="register()" class="register-form">
+            <div class="form-group">
+                <label for="firstName">First Name</label>
+                <div class="input-wrapper">
+                    <input 
+                        type="text" 
+                        id="firstName" 
+                        [(ngModel)]="registerModel.firstName" 
+                        name="firstName" 
+                        placeholder="Enter your first name"
+                        required 
+                    />
+                    <span class="input-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                    </span>
+                </div>
+            </div>
 
-        <div>
-            <label for="lastName">Last Name:</label>
-            <input type="text" id="lastName" [(ngModel)]="registerModel.lastName" name="lastName" required />
-        </div>
+            <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <div class="input-wrapper">
+                    <input 
+                        type="text" 
+                        id="lastName" 
+                        [(ngModel)]="registerModel.lastName" 
+                        name="lastName" 
+                        placeholder="Enter your last name"
+                        required 
+                    />
+                    <span class="input-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                    </span>
+                </div>
+            </div>
 
-        <div>
-            <label for="email">Email:</label>
-            <input type="email" id="email" [(ngModel)]="registerModel.email" name="email" required />
-        </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <div class="input-wrapper">
+                    <input 
+                        type="email" 
+                        id="email" 
+                        [(ngModel)]="registerModel.email" 
+                        name="email" 
+                        placeholder="Enter your email"
+                        required 
+                    />
+                    <span class="input-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                            <polyline points="22,6 12,13 2,6"/>
+                        </svg>
+                    </span>
+                </div>
+            </div>
 
-        <div>
-            <label for="password">Password:</label>
-            <input type="password" id="password" [(ngModel)]="registerModel.password" name="password" required />
-        </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="input-wrapper">
+                    <input 
+                        [type]="showPassword ? 'text' : 'password'"
+                        id="password" 
+                        [(ngModel)]="registerModel.password" 
+                        name="password" 
+                        placeholder="Create a password"
+                        required 
+                    />
+                    <span class="input-icon clickable" (click)="showPassword = !showPassword">
+                        <svg *ngIf="!showPassword" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                            <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                        <svg *ngIf="showPassword" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
+                            <line x1="1" y1="1" x2="23" y2="23"/>
+                        </svg>
+                    </span>
+                </div>
+            </div>
 
-        <div>
-            <label for="postalCodeId">Postal Code:</label>
-            <select id="postalCodeId" [(ngModel)]="registerModel.postalCodeId" name="postalCodeId" required>
-                <option value="" disabled>Select Postal Code</option>
-                <option *ngFor="let postalCode of postalCodes" [value]="postalCode.postalCodeId">
-                    {{ postalCode.name }}
-                </option>
-            </select>
-        </div>
+            <div class="form-group">
+                <label for="postalCodeId">Postal Code</label>
+                <div class="input-wrapper select-wrapper">
+                    <select 
+                        id="postalCodeId" 
+                        [(ngModel)]="registerModel.postalCodeId" 
+                        name="postalCodeId" 
+                        required
+                    >
+                        <option value="" disabled>Select Postal Code</option>
+                        <option *ngFor="let postalCode of postalCodes" [value]="postalCode.postalCodeId">
+                            {{postalCode.postalCodeId}} ({{ postalCode.name }})
+                        </option>
+                    </select>
+                    <span class="input-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                            <circle cx="12" cy="10" r="3"/>
+                        </svg>
+                    </span>
+                </div>
+            </div>
 
-        <button type="submit">Register</button>
+            <div class="form-footer">
+                <button type="submit" class="register-button">
+                    <span>Create Account</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"/>
+                        <polyline points="12 5 19 12 12 19"/>
+                    </svg>
+                </button>
+            </div>
 
-        <p>Already have an account? <a routerLink="/login">Login</a></p>
+            <div class="login-link">
+                <p>Already have an account? <a routerLink="/login">Sign in</a></p>
+            </div>
 
-        <div *ngIf="errorMessage" class="error-message">
-            <p>{{ errorMessage }}</p>
-        </div>
-    </form>
+            <div *ngIf="errorMessage" class="error-message">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="12" y1="8" x2="12" y2="12"/>
+                    <line x1="12" y1="16" x2="12.01" y2="16"/>
+                </svg>
+                <span>{{ errorMessage }}</span>
+            </div>
+        </form>
+    </div>
 </div>

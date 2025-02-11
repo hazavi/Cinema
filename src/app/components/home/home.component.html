@@ -39,7 +39,7 @@
             <!-- Displaying Movie Cards -->
             <div *ngFor="let movie of movies" class="movie-card">
                 <div class="card-image">
-                    <img [src]="movie.posterUrl" [alt]="movie.title" />
+                    <img class="movie-poster" src="data:image/jpeg;base64,{{ movie.posterUrlBase64 }}" alt="Movie Poster">
                     <div class="card-overlay" (click)="viewMovie(movie.movieId, movie.title)">
                         <span class="watch-logo">
                             <svg xmlns="http://www.w3.org/2000/svg" height="50px" viewBox="0 -960 960 960" width="50px"

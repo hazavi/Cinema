@@ -5,6 +5,23 @@
   --card-color: #25344d;
   --text-color: #fff;
 }
+:root {
+  --primary-color: #8F00FF;
+  --primary-hover: #7B00DB;
+  --text-primary: #ffffff;
+  --text-secondary: #94a3b8;
+  --background: #1c273a;
+  --card-bg: #141420;
+  --overlay-dark: rgba(10, 10, 15, 0.9);
+  --glass-bg: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --gradient-primary: linear-gradient(135deg, #8F00FF 0%, #4F46E5 100%);
+}
+:root {
+  --error-color: #dc2626;
+  --input-border: #e5e5e5;
+  --input-focus: #8F00FF;
+}
 body {
   font-family: "Plus Jakarta Sans", sans-serif;
   background-color: #1c273a;
