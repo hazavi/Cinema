@@ -46,3 +46,5 @@ For testing purposes, you can use the following credentials:
 - **Email**: `naruto.uzumaki@bioma.com`
 - **Password**: `naruto123`
 
+### Note
+- Datas will take time to load... 
