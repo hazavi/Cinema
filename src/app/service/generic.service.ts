@@ -5,6 +5,7 @@ import { Address } from '../models/address';
 import { RegisterModel } from '../models/registermodel';
 import { LoginRequest } from '../models/loginrequest';
 import { LoginResponse } from '../models/loginresponse';
+import { environment } from '../../environments/environment';
 
 const httpOptions = {
   heades: new HttpHeaders({
@@ -15,7 +16,7 @@ const httpOptions = {
   providedIn: 'root',
 })
 export class GenericService<Model> {
-  private readonly url: string = 'https://bioma.azurewebsites.net/api';
+  private readonly url: string = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 
