@@ -12,7 +12,6 @@ Bioma Cinema is a full-stack web app for browsing movies and managing cinema ope
 - **AutoMapper**: Entity-to-DTO mapping.
 - **JWT**: Secure authentication.
 - **Azure SQL Database**: Cloud database.
-- [**Cinema.API - Git Repo**](https://github.com/hazavi/Cinema.API)
 
 ### Frontend
 - **Angular**: Dynamic, responsive UI.
@@ -43,8 +42,8 @@ Bioma Cinema is a full-stack web app for browsing movies and managing cinema ope
 
 ## User Testing Login
 For testing purposes, you can use the following credentials:
-- **Email**: `naruto.uzumaki@bioma.com`
-- **Password**: `naruto123`
+- **Email**: `sasuke@bioma.site`
+- **Password**: `sasuke123`
 
 ### Note
 - Datas will take time to load... 
