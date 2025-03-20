@@ -11,5 +11,6 @@ export const adminGuard: CanActivateFn = (route, state) => {
     alert('You are not authorized to access this page.');
     return false;
   }
+  
   return true;
 };

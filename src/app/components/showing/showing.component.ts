@@ -5,11 +5,12 @@ import { MovieGenre } from '../../models/moviegenre';
 import { Genre } from '../../models/genre';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { LoadingComponent } from '../loading/loading.component';
 
 @Component({
   selector: 'app-showing',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, LoadingComponent],
   templateUrl: './showing.component.html',
   styleUrls: ['./showing.component.css'],
 })
@@ -18,6 +19,7 @@ export class ShowingComponent implements OnInit {
   genres: Genre[] = []; // Stores all genres
   movieGenres: MovieGenre[] = []; // Stores all movie-genre relationships
   movieAvailable: Movie | null = null;
+  isLoading: boolean = false;
 
   constructor(
     private movieService: GenericService<Movie>,
@@ -31,10 +33,22 @@ export class ShowingComponent implements OnInit {
   }
 
   private fetchMovies(): void {
+    this.isLoading = true; // Start loading
+
     this.movieService.getAll('Movies').subscribe((movies) => {
-      
-      this.movies = movies.filter((movie) => movie.isShowing); // Filter currently showing movies
-      this.fetchGenres(); // Fetch genres after movies
+      // Sort movies by release date in descending order (latest first)
+      const sortedMovies = movies.sort((a, b) => {
+        if (!a.releaseDate || !b.releaseDate) {
+          return 0; // Handle cases where releaseDate might be undefined
+        }
+        return new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime();
+      });
+    
+      // Fetch only the last 5 movies (latest 4 movies based on release date)
+      this.movies = sortedMovies.slice(0, 5);
+
+      this.movies = movies.filter((movie) => movie.isShowing); 
+      this.fetchGenres(); 
     });
   }
 
@@ -42,6 +56,7 @@ export class ShowingComponent implements OnInit {
     this.genreService.getAll('Genres').subscribe((genres) => {
       this.genres = genres;
       this.fetchMovieGenres(); // Fetch movie-genre relationships after genres
+      this.isLoading = false; // Stop loading
     });
   }
 

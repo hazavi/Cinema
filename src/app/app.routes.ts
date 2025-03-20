@@ -21,16 +21,19 @@ import { adminGuard } from './guards/admin.guard';
 import { ProfileComponent } from './components/profile/profile.component';
 import { OrderComponent } from './components/order/order.component';
 import { CreateSeatComponent } from './components/create-seat/create-seat.component';
+import { authGuard } from './guards/auth.guard';
+import { LoadingComponent } from './components/loading/loading.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' }, // Default redirect to home
   { path: 'home', component: HomeComponent, data: { title: 'Home - Bioma' }}, // Home Page
-  { path: 'login', component: LoginComponent, data: { title: 'Login - Bioma' }}, // Login Page
-  { path: 'register', component: RegisterComponent, data: { title: 'Register - Bioma' } }, // Register Page
+  { path: 'login', component: LoginComponent, canActivate: [authGuard], data: { title: 'Login - Bioma' }}, // Login Page
+  { path: 'register', component: RegisterComponent, canActivate: [authGuard], data: { title: 'Register - Bioma' } }, // Register Page
   { path: 'movie/:id/:movieName', component: MovieComponent}, // Movie Page
   { path: 'showing', component: ShowingComponent }, // Showing page
   { path: 'profile/:id', component: ProfileComponent }, // Profile page
   { path: 'order/:showtimeId', component: OrderComponent }, // Order page
+
 
   // Admin-related routes
   {

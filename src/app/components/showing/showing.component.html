@@ -1,4 +1,5 @@
 
+<app-loading *ngIf="isLoading"></app-loading>
 
 <section class="showings-section">
   <div class="section-header">
@@ -23,7 +24,7 @@
         </div>
       </div>
       <div class="movie-details">
-        <h3 class="movie-title">{{ movie.title }}</h3>
+        <h3 class="movie-title" [attr.title]="movie.title">{{ movie.title }}</h3>
         <div class="movie-meta">
           <span class="movie-genres">{{ movie.genreNames }}</span>
           <div class="rating">

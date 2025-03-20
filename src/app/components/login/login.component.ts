@@ -35,6 +35,7 @@ export class LoginComponent {
         localStorage.setItem('firstName', response.firstName || ''); // Store first name
         localStorage.setItem('lastName', response.lastName || ''); // Store last name
         localStorage.setItem('isAdmin', String(response.isAdmin)); // Store role info (admin)
+        localStorage.setItem('isLogin', 'true'); // Store login status
         const userId = parseInt(localStorage.getItem('userId') || '0', 10);
           
         alert('Login successful!');

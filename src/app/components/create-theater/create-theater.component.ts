@@ -23,6 +23,10 @@ export class CreateTheaterComponent {
   theaterList: Theater[] = [];
   addressList: Address[] = [];
   postalCodeList: PostalCode[] = [];
+  theaterNames: string[] = ['FBio', 'KBio', 'LBio', 'RBio', 'ABio', 'HBio'];
+  capacities: number[] = [40, 80, 120, 130, 200];
+  locations: string[] = ['Bio 1', 'Bio 2', 'Bio 3', 'Bio 4', 'Bio 5', 'Bio 6', 'Bio 7', 'Bio 8', 'Bio 9', 'Bio 10'];
+  
   constructor(
     private fb: FormBuilder,
     private theaterService: GenericService<Theater>,

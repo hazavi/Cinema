@@ -4,30 +4,37 @@
 
         <div class="form-group">
             <label for="name">Theater Name</label>
-            <input id="name" formControlName="name" type="text" placeholder=" (FBio, KBio, LBio, RBio, ABio & HBio)" />
+            <select id="name" formControlName="name">
+              <option value="" disabled selected>Select a theater</option>
+              <option *ngFor="let theater of theaterNames" [value]="theater">{{ theater }}</option>
+            </select>
             <div *ngIf="theaterForm.get('name')?.invalid && theaterForm.get('name')?.touched" class="error-text">
-                Name is required and must be under 100 characters.
+              Name is required and must be under 100 characters.
             </div>
-        </div>
-
-        <div class="form-group">
+          </div>
+          
+          <div class="form-group">
             <label for="capacity">Capacity</label>
-            <input id="capacity" formControlName="capacity" type="number" placeholder=" (40, 80, 120, 130, 200)" />
-            <div *ngIf="theaterForm.get('capacity')?.invalid && theaterForm.get('capacity')?.touched"
-                class="error-text">
-                Capacity is required and must be greater than 0.
+            <select id="capacity" formControlName="capacity">
+              <option value="" disabled selected>Select capacity</option>
+              <option *ngFor="let cap of capacities" [value]="cap">{{ cap }}</option>
+            </select>
+            <div *ngIf="theaterForm.get('capacity')?.invalid && theaterForm.get('capacity')?.touched" class="error-text">
+              Capacity is required and must be greater than 0.
             </div>
-        </div>
-
-        <div class="form-group">
+          </div>
+          
+          <div class="form-group">
             <label for="location">Location</label>
-            <input id="location" formControlName="location" type="text" placeholder="(Bio 1-10)" />
-            <div *ngIf="theaterForm.get('location')?.invalid && theaterForm.get('location')?.touched"
-                class="error-text">
-                Location is required.
+            <select id="location" formControlName="location">
+              <option value="" disabled selected>Select location</option>
+              <option *ngFor="let loc of locations" [value]="loc">{{ loc }}</option>
+            </select>
+            <div *ngIf="theaterForm.get('location')?.invalid && theaterForm.get('location')?.touched" class="error-text">
+              Location is required.
             </div>
-        </div>
-
+          </div>
+          
         <div class="form-group">
             <label for="addressId">Address</label>
             <select id="addressId" formControlName="addressId">

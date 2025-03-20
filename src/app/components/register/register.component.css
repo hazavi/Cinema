@@ -7,7 +7,7 @@
 
 /* Container Styles */
 .register-container {
-  min-height: 100vh;
+  min-height: 80vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -17,7 +17,7 @@
 
 .register-card {
   width: 100%;
-  max-width: 500px;
+  max-width: 450px;
   background: var(--card-bg);
   border-radius: 24px;
   padding: 3rem;
@@ -33,14 +33,14 @@
 
 .register-header h2 {
   color: var(--text-primary);
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
 }
 
 .subtitle {
   color: var(--text-secondary);
-  font-size: 1rem;
+  font-size: 0.8rem;
 }
 
 /* Form Styles */
@@ -60,7 +60,7 @@
 
 label {
   color: var(--text-primary);
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   font-weight: 500;
 }
 
@@ -85,11 +85,11 @@ label {
 
 input, select {
   width: 100%;
-  padding: 1rem;
+  padding: 0.7rem;
   padding-right: 2.5rem;
   border: 1.5px solid var(--input-border);
   border-radius: 12px;
-  font-size: 1rem;
+  font-size: 0.8rem;
   transition: all 0.3s ease;
   background: transparent;
   box-sizing: border-box;
@@ -139,7 +139,7 @@ input:focus, select:focus {
 /* Button Styles */
 .register-button {
   width: 100%;
-  padding: 1rem;
+  padding: 0.7rem;
   background: var(--primary-color);
   color: white;
   border: none;
@@ -176,7 +176,7 @@ input:focus, select:focus {
 /* Login Link Styles */
 .login-link {
   text-align: center;
-  margin-top: 1.5rem;
+  margin-top: 0.5rem;
   width: 100%;
 }
 

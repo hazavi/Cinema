@@ -67,7 +67,7 @@ body {
 
 .movie-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
 
 /* Poster Styles */
@@ -146,6 +146,9 @@ body {
     var(--gradient-end)
   );
 }
+.movie-details:hover {
+  cursor: pointer;
+}
 
 .movie-title {
   font-size: 1.25rem;
@@ -161,6 +164,7 @@ body {
   line-clamp: 2; /* Standard property (future compatibility) */
   box-orient: vertical; /* For compatibility with older implementations */
 }
+
 
 .movie-meta {
   display: flex;
