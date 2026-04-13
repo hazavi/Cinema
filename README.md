@@ -40,10 +40,3 @@ Bioma Cinema is a full-stack web app for browsing movies and managing cinema ope
 
 ---
 
-## User Testing Login
-For testing purposes, you can use the following credentials:
-- **Email**: `sasuke@bioma.site`
-- **Password**: `sasuke123`
-
-### Note
-- Datas will take time to load... 
